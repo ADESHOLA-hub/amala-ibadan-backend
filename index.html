@@ -25,9 +25,11 @@
     </header>
 
 <section class="amala">
-        <h1 class="home">Welcome to Amala Ibadan</h1>
-        <p>your premier destination for authentic Nigerian cuisine</p>
-
+  <div class="amala-content">
+    <h1>Welcome to <span class="highlight">Amala Ibadan</span></h1>
+    <p class="tagline">Authentic Nigerian Taste • Fresh • Fast • Flavorful</p>
+    <a href="menu.html" class="cta-btn">🍲 Explore Menu</a>
+  </div>
 </section>
 
 
@@ -50,52 +52,98 @@
 </section>
 
 
-<section>
-    <div class="section2">
-    <img src="images/workers.jpg" alt="">
+<section class="about-flavor">
+  <div class="flavor-wrapper">
+    
+    <!-- Image side -->
+    <div class="flavor-image">
+      <img src="images/workers.jpg" alt="Amala Ibadan Workers">
+      <div class="image-overlay"></div>
+    </div>
 
-    <div class="dine">
-        <h1>A dinstinctive dining destination inspired by culture.</h1>
-        <p>Our menu features a wide array of traditional Nigerian dishes, each crafted with care 
-        and the finest ingredients. From Jollof Rice bursting with vibrant tomato flavors to 
-        smoky Suya skewers and the comforting warmth of Pounded Yam, we offer a culinary 
-        journey through Nigerias diverse regions. Each dish is a reflection of our dedication 
-        to preserving the authentic taste and cooking methods that have been passed down through
-        generations.</p>
-<a href="menu.html" class="button"> Menu </a>
-    <div class="menu">
-        <img src="images/food1.jpg" alt="">
-        <img src="images/meatstew.jpg" alt="">
-        <img src="images/rice.jpg" alt="">
+    <!-- Content side -->
+    <div class="flavor-content">
+      <h2>🍲 A Distinctive Dining Destination</h2>
+      <h1>Inspired by Culture, Crafted with Love</h1>
+      <p>
+        Our menu celebrates the soul of Nigeria with a vibrant array of 
+        <strong>authentic dishes</strong> made from the finest ingredients.  
+        From <em>smoky Suya</em> and <em>flavorful Jollof Rice</em> to the 
+        comfort of <em>Pounded Yam</em>, every bite is a journey across 
+        Nigeria’s diverse regions.  
+        <br><br>
+        Experience tradition reimagined with a touch of modern elegance.
+      </p>
 
+      <a href="menu.html" class="btn-explore">🍴 Explore Menu</a>
+
+      <!-- Dish Preview -->
+      <div class="dish-preview">
+        <img src="images/food1.jpg" alt="Special Dish">
+        <img src="images/meatstew.jpg" alt="Meat Stew">
+        <img src="images/rice.jpg" alt="Rice Dish">
+      </div>
+    </div>
+  </div>
+</section>
+
+   <section id="ceo" class="ceo-section">
+  <div class="container">
+    <div class="ceo-content">
+      <div class="ceo-text">
+        <h2>OUR CEO</h2>
+        <p>
+          Mr. and Mrs. Salako are the visionary leaders behind <strong>Amala Ibadan</strong>, 
+          bringing over four years of experience in the culinary industry. Since taking the helm, 
+          they have transformed the brand into a household name known for authentic flavors, 
+          consistency, and a dedication to customer satisfaction.
+        </p>
+        <p>
+          Their mission is simple: to make every customer feel at home while enjoying 
+          premium-quality Nigerian meals prepared with passion.
+        </p>
+      </div>
+      <div class="ceo-box">
+        <div class="ceo-image">
+          <img src="images/ceo" alt="CEO of Amala Ibadan">
         </div>
+      </div>
     </div>
-    </div>
+  </div>
 </section>
 
-    <section>
-        <div class="section3">
-        <div class="about">
-            <h1 style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">OUR CEO</h1><br>
-            <p>
-                Mr. and Mrs. Salako are the visionary leaders behind Amala Ibadan, 
-                bringing over four years of experience in the culinary industry. 
-                Since taking the helm in 2020, they have driven the company to new 
-                heights with their innovative approaches and dedication to excellence. 
-                Their leadership has transformed Amala Ibadan into a beloved destination
-                 for authentic Nigerian cuisine, blending tradition with modernity while 
-                 expanding the brands reach and impact. The Salakos are committed to 
-                 preserving Nigeria's rich food heritage, ensuring every dish is a celebration 
-                 of culture and quality.
-            </p>
-            <a href="about.html" class="aboutus">About Us</a>
-</div>
+<section class="why-choose-us">
+  <div class="container">
+    <h2>Why Choose Us</h2>
+    <div class="reasons">
+      <div class="reason">
+        <div class="icon-circle">
+          <img src="images/fresh.png" alt="Fresh Ingredients">
+        </div>
+        <h3>Fresh Ingredients</h3>
+        <p>We prepare every meal with the freshest and highest quality produce.</p>
+      </div>
 
-<div class="ceoimg">
-    <img src="images/ceo (2).jpg" alt="" class="ceoimg">
-</div>
-</div>
+      <div class="reason">
+        <div class="icon-circle">
+          <img src="images/authentic.png" alt="Authentic Recipes">
+        </div>
+        <h3>Authentic Recipes</h3>
+        <p>Experience true Nigerian flavors passed down through generations.</p>
+      </div>
+
+      <div class="reason">
+        <div class="icon-circle">
+          <img src="images/delivery.png" alt="Fast Delivery">
+        </div>
+        <h3>Fast Delivery</h3>
+        <p>Your favorite meals delivered hot and on time, every time.</p>
+      </div>
+    </div>
+  </div>
 </section>
+
+
 
 <section class="locations-section">
   <div class="locations-header">
@@ -135,9 +183,35 @@
         <p><strong>Hours:</strong> 9AM - 11PM daily</p>
       </div>
     </div>
+     <div class="location-card">
+      <img src="images/abuja.jpg" alt="Abuja Location">
+      <div class="location-info">
+        <h3>Abuja</h3>
+        <p>8 Wuse Zone 6</p>
+        <p><strong>Hours:</strong> 9AM - 11PM daily</p>
+      </div>
+    </div>
+     <div class="location-card">
+      <img src="images/abuja.jpg" alt="Abuja Location">
+      <div class="location-info">
+        <h3>Abuja</h3>
+        <p>8 Wuse Zone 6</p>
+        <p><strong>Hours:</strong> 9AM - 11PM daily</p>
+      </div>
+    </div>
   </div>
 </section>
 
+<section class="newsletter">
+  <div class="container">
+    <h2>Stay Updated</h2>
+    <p>Join our newsletter and get the latest updates, offers, and delicious news.</p>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
 
 <div class="whatsapp-icon">
 <a href="https://wa.me/2347047777521?text=Hello!%20I%20would%20like%20to%20place%20an%20order." class="whatsapp-icon" target="_blank" rel="noopener">
@@ -147,14 +221,20 @@
 </div>
 
 
-<footer class="footer">
-    <div class="footer-content">
-        <p>© 2024 Amala Ibadan Ltd. All rights reserved. The Amala Ibadan name, logos, and related marks are registered trademarks of Amala Ibadan Ltd.</p>
-        <p>
-            <a href="#" class="footer-link">Privacy Statement</a> | 
-            <a href="#" class="footer-link">Terms of Use</a>
-        </p>
+    <footer class="footer-section">
+  <div class="footer-content">
+    <h2>Need Assistance?</h2>
+    <p>If you have any questions, feedback, or need support, we're here to help. Reach out to us anytime.</p>
+    <a href="contact.html" class="footer-button">
+      <i class="fas fa-phone-alt"></i> Contact Us
+    </a>
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="privacy.html">Privacy Policy</a>
     </div>
+    <p class="footer-copy">&copy; 2025 Amala Ibadan. All rights reserved.</p>
+  </div>
 </footer>
 
 
