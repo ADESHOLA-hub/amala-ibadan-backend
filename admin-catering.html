@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catering Packages | Admin</title>
+    <link rel="stylesheet" href="adminstyle.css">
+    <link rel="shortcut icon" href="images/logo.png">
+    <style>
+        /* Fallback styling for fields not present in the original admin-menu page */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 400; align-items: center; justify-content: center; }
+        .modal-overlay.show { display: flex; }
+        .modal-box { background: #fff; border-radius: 14px; padding: 26px 26px 22px; width: 100%; max-width: 480px; max-height: 88vh; overflow-y: auto; }
+        .modal-box h2 { margin-bottom: 16px; font-size: 1.15rem; }
+        .modal-box label { display: block; font-size: 0.8rem; font-weight: 600; color: #555; margin-bottom: 12px; }
+        .modal-box input, .modal-box select, .modal-box textarea {
+            width: 100%; padding: 9px 11px; margin-top: 5px; border: 1.5px solid #e2e2e5;
+            border-radius: 8px; font-size: 0.9rem; font-family: inherit; resize: vertical;
+        }
+        .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+        .checkbox-row input { width: auto; margin: 0; }
+        .checkbox-row label { margin: 0; }
+        .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px; }
+        .form-error { color: #c0392b; font-size: 0.82rem; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <h1>Amala Ibadan <span>Admin</span></h1>
+        <nav class="admin-nav">
+            <a href="admin-orders.html">Orders</a>
+            <a href="admin-menu.html">Menu</a>
+            <a href="admin-catering.html" class="active-tab">Catering</a>
+        </nav>
+    </header>
+
+    <main class="admin-container">
+        <div class="admin-toolbar">
+            <div class="filter-pills" id="categoryFilters"></div>
+            <div style="display:flex; gap:10px;">
+                <button class="btn-secondary" onclick="loadPackages()">↻ Refresh</button>
+                <button class="btn-secondary" onclick="openAddModal()">+ Add Package</button>
+            </div>
+        </div>
+
+        <div id="pkgGrid" class="menu-admin-grid">
+            <p class="loading-text">Loading catering packages...</p>
+        </div>
+    </main>
+
+    <!-- Add/Edit Modal -->
+    <div id="pkgModal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 id="modalTitle">Add Catering Package</h2>
+            <p id="formError" class="form-error"></p>
+
+            <form id="packageForm">
+                <input type="hidden" id="pkgId">
+
+                <label>Package Name
+                    <input type="text" id="pkgName" placeholder="e.g. Breakfast Option One" required>
+                </label>
+
+                <div class="form-row-2">
+                    <label>Price Label
+                        <input type="text" id="pkgPriceLabel" placeholder="e.g. ₦7,500 or From ₦16,000" required>
+                    </label>
+                    <label>Category
+                        <select id="pkgCategory"></select>
+                    </label>
+                </div>
+
+                <div class="form-row-2">
+                    <label>Min Guests <span style="font-weight:400;color:#999;">(optional)</span>
+                        <input type="number" id="pkgMinGuests" placeholder="e.g. 50">
+                    </label>
+                    <label>Icon (emoji)
+                        <input type="text" id="pkgIcon" placeholder="🍽️">
+                    </label>
+                </div>
+
+                <div class="form-row-2">
+                    <label>Ribbon Text <span style="font-weight:400;color:#999;">(optional)</span>
+                        <input type="text" id="pkgRibbon" placeholder="e.g. Popular, Best Seller">
+                    </label>
+                    <div>
+                        <div class="checkbox-row" style="margin-top:26px;">
+                            <input type="checkbox" id="pkgRibbonGold">
+                            <label for="pkgRibbonGold">Gold ribbon style</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="pkgFeatured">
+                    <label for="pkgFeatured">Featured (highlighted card)</label>
+                </div>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="pkgAvailable" checked>
+                    <label for="pkgAvailable">Available</label>
+                </div>
+
+                <label>Description <span style="font-weight:400;color:#999;">(for single-dish cards — leave blank if using inclusions)</span>
+                    <textarea id="pkgDescription" rows="2" placeholder="Short description of the dish"></textarea>
+                </label>
+
+                <label>Inclusions <span style="font-weight:400;color:#999;">(for package/bowl cards — one item per line)</span>
+                    <textarea id="pkgInclusions" rows="4" placeholder="Club Sandwich&#10;Oat Porridge with Fruits&#10;Boiled Yam"></textarea>
+                </label>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" id="savePkgBtn" class="btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="adminCatering.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Amala Ibadan</title>
+    <link rel="stylesheet" href="menustyle.css">
+    <link rel="stylesheet" href="authstyle.css">
+    <link rel="shortcut icon" href="images/logo.png">
+</head>
+<body>
+    <header id="navbar">
+        <nav>
+            <div class="logo"><img src="images/logo2.png" alt="Amala Ibadan Logo"></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order Online</a></li>
+                <li><a href="track.html">Track Order</a></li>
+                <ul class="nav-links" id="authNavSlot" style="display:contents;"></ul>
+            </ul>
+            <img src="images/menu3.png" alt="Menu Icon" class="menu-btn">
+        </nav>
+    </header>
+
+    <section class="auth-page">
+        <div class="auth-box">
+            <h1>Welcome Back</h1>
+            <p class="auth-subtitle">Log in to view your order history</p>
+
+            <form id="loginForm">
+                <label>Email
+                    <input type="email" id="loginEmail" required>
+                </label>
+                <label>Password
+                    <input type="password" id="loginPassword" required>
+                </label>
+                <p id="loginError" class="form-error"></p>
+                <button type="submit" id="loginBtn" class="place-order-btn">Log In</button>
+            </form>
+
+            <p class="auth-switch">Don't have an account? <a href="signup.html">Sign up</a></p>
+        </div>
+    </section>
+
+    <script src="menuscript.js"></script>
+    <script src="authHelper.js"></script>
+    <script src="loginscript.js"></script>
+</body>
+</html>

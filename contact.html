@@ -21,83 +21,331 @@
             <img src="images/menu3.png" alt="Menu Icon" class="menu-btn">
         </nav>
     </header>
-     <section class="hero-contact">
-    <h1>We’d Love to Hear From You!</h1>
-    <p>Have questions, feedback, or want to plan your next big event? We're here for you.</p>
-     </section>
+     <section class="contact-intro">
 
-      <section class="main-contact">
-  <div class="contact-form">
-    <h2>Send Us a Message</h2>
-    <form action="submit_form.php" method="POST">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" placeholder="Your Full Name" required />
+    <div class="contact-header">
 
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" placeholder="Your Email Address" required />
+        <span>CONTACT US</span>
 
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phone" placeholder="Phone Number (optional)" />
+        <h1>Let's Start A Conversation</h1>
 
-      <label for="inquiry-type">Reason for Contact</label>
-      <select id="inquiry-type" name="inquiry-type" required>
-        <option value="">Select a reason...</option>
-        <option value="catering">Catering / Event Booking</option>
-        <option value="bulk">Bulk Orders</option>
-        <option value="feedback">Feedback</option>
-        <option value="general">General Inquiry</option>
-      </select>
+        <p>
+            Whether you're planning an event, placing a catering order,
+            or simply have a question, our team is always ready to assist.
+        </p>
 
-      <label for="message">Your Message</label>
-      <textarea id="message" name="message" rows="6" placeholder="Type your message here..." required></textarea>
+    </div>
 
-      <button type="submit">Send Message</button>
-    </form>
-  </div>
+    <div class="contact-grid">
 
-  <div class="quick-contact">
-    <h2>Quick Contact Info</h2>
-    <p><strong>Email:</strong> amalaibadanofficial@gmail.com</p>
-    <p><strong>Phone:</strong> +234 704 777 7521</p>
-    <p><strong>WhatsApp:</strong> <a href="https://wa.me/2347047777521" target="_blank">Chat With Us</a></p>
-    <p><strong>Hours:</strong> Mon–Sun: 9:00 AM – 9:00 PM</p>
-  </div>
+        <a href="tel:+2347047777521" class="contact-card">
+
+            <div class="contact-icon">
+                <i class="fas fa-phone-alt"></i>
+            </div>
+
+            <h3>Call Us</h3>
+
+            <p>+234 704 777 7521</p>
+
+        </a>
+
+        <a href="mailto:amalaibadanofficial@gmail.com" class="contact-card">
+
+            <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+
+            <h3>Email Us</h3>
+
+            <p>Quick responses every day.</p>
+
+        </a>
+
+        <a href="#branches" class="contact-card">
+
+            <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+
+            <h3>Visit Us</h3>
+
+            <p>Three locations across Lagos.</p>
+
+        </a>
+
+        <a href="https://wa.me/2347047777521" class="contact-card">
+
+            <div class="contact-icon">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+
+            <h3>WhatsApp</h3>
+
+            <p>Instant customer support.</p>
+
+        </a>
+
+    </div>
+
 </section>
 
 
-  <section class="branch-listing">
-    <h2>Our Locations</h2>
-    <div class="branches">
-      <div class="branch-card">
-        <h3>Nobex, Lagos</h3>
-        <p>162 Ikotun Idimu Road, Nobex BusStop</p>
-        <p>📞 +234 704 777 7521</p>
-      </div>
-      <div class="branch-card">
-        <h3>Alagbado</h3>
-        <p>82 AIT Road, Alagbado, Lagos</p>
-        <p>📞 +234 916 977 4773</p>
-      </div>
-      <div class="branch-card">
-        <h3>Grocery Bazaar Meiran</h3>
-        <p>71 Meiran Road, Lagos</p>
-        <p>📞 +234 906 658 4259</p>
-      </div>
-      <!-- Add more branch cards as needed -->
-    </div>
-  </section>
+<section class="contact-section" id="contact-form">
 
-  <section class="map-hours">
-    <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=..." width="600" height="450" style="border:0;" allowfullscreen loading="lazy"></iframe>
+    <div class="contact-wrapper">
+
+        <div class="contact-form-box">
+
+            <span class="section-tag">SEND A MESSAGE</span>
+
+            <h2>We're Here To Help</h2>
+
+            <p>
+                Fill out the form below and our team will get back to you as soon as possible.
+            </p>
+
+            <form>
+
+                <div class="input-group">
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+
+                <div class="input-group">
+                    <input type="tel" placeholder="Phone Number">
+                </div>
+
+                <div class="input-group">
+                    <select required>
+                        <option>Select Inquiry</option>
+                        <option>Catering</option>
+                        <option>Bulk Orders</option>
+                        <option>General Enquiry</option>
+                        <option>Feedback</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <textarea placeholder="Your Message" rows="6"></textarea>
+                </div>
+
+                <button type="submit">
+                    Send Message
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="contact-image">
+
+            <img src="images/contact-food.jpg" alt="Amala Ibadan">
+
+            <div class="image-card">
+
+                <h3>Every Great Meal Starts With A Conversation.</h3>
+
+                <p>
+                    Planning catering or have a special request?
+                    We'd love to hear from you.
+                </p>
+
+            </div>
+
+        </div>
+
     </div>
-    <div class="hours-box">
-      <h3>Opening Hours</h3>
-      <ul>
-        <li><strong>Monday – Sunday:</strong> 9:00 AM – 9:00 PM</li>
-      </ul>
+
+</section>
+
+<section class="locations-section" id="branches">
+
+    <div class="section-heading">
+
+        <span>OUR LOCATIONS</span>
+
+        <h2>Find An Amala Ibadan Near You</h2>
+
+        <p>
+            Visit any of our branches across Lagos and enjoy authentic Nigerian cuisine in a welcoming atmosphere.
+        </p>
+
     </div>
-  </section>
+
+    <div class="locations-grid">
+
+        <div class="location-card">
+
+            <img src="images/location1.jpg" alt="Nobex Branch">
+
+            <div class="location-content">
+
+                <h3>Nobex</h3>
+
+                <p>162 Ikotun–Idimu Road, Nobex Bus Stop, Lagos.</p>
+
+                <div class="location-info">
+
+                    <span>Open Daily</span>
+
+                    <span>9AM – 9PM</span>
+
+                </div>
+
+                <a href="https://maps.google.com" target="_blank">
+                    Get Directions
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="location-card">
+
+            <img src="images/location2.jpg" alt="Alagbado">
+
+            <div class="location-content">
+
+                <h3>Alagbado</h3>
+
+                <p>82 AIT Road, Alagbado, Lagos.</p>
+
+                <div class="location-info">
+
+                    <span>Open Daily</span>
+
+                    <span>9AM – 9PM</span>
+
+                </div>
+
+                <a href="https://maps.google.com" target="_blank">
+                    Get Directions
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="location-card">
+
+            <img src="images/location3.jpg" alt="Meiran">
+
+            <div class="location-content">
+
+                <h3>Meiran</h3>
+
+                <p>71 Meiran Road, Lagos.</p>
+
+                <div class="location-info">
+
+                    <span>Open Daily</span>
+
+                    <span>9AM – 9PM</span>
+
+                </div>
+
+                <a href="https://maps.google.com" target="_blank">
+                    Get Directions
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="visit-section">
+
+    <div class="visit-heading">
+
+        <span>VISIT US</span>
+
+        <h2>Come Experience Authentic Nigerian Cuisine</h2>
+
+        <p>
+            Whether you're dining in or picking up an order,
+            we're always ready to welcome you.
+        </p>
+
+    </div>
+
+    <div class="map-wrapper">
+
+        
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.644964049074!2d3.2752520758168195!3d6.566417322661437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b91e8872e0b73%3A0xa6dc2f7969b2496f!2sAmala%20Ibadan%20HQ!5e0!3m2!1sen!2sng!4v1783983351960!5m2!1sen!2sng" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+        <div class="map-card">
+
+            <h3>Head Office</h3>
+
+            <p>
+                162 Ikotun–Idimu Road,
+                Nobex Bus Stop,
+                Lagos.
+            </p>
+
+            <div class="map-details">
+
+                <div>
+                    <strong>Phone</strong>
+                    <span>+234 704 777 7521</span>
+                </div>
+
+                <div>
+                    <strong>Hours</strong>
+                    <span>9:00 AM – 9:00 PM</span>
+                </div>
+
+            </div>
+
+            <a href="#">
+                Get Directions
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="contact-cta">
+
+    <div class="cta-content">
+
+        <span>AMALA IBADAN</span>
+
+        <h2>
+            Ready To Enjoy
+            Authentic Nigerian Cuisine?
+        </h2>
+
+        <p>
+            From family meals and corporate catering to special celebrations,
+            we're passionate about serving unforgettable flavours with
+            exceptional hospitality.
+        </p>
+
+        <div class="cta-buttons">
+
+            <a href="menu.html" class="cta-primary">
+                Explore Menu
+            </a>
+
+            <a href="order.html" class="cta-secondary">
+                Order Online
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
 
   <section class="socials">
     <h2>Follow Us</h2>

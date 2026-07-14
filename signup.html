@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Amala Ibadan</title>
+    <link rel="stylesheet" href="menustyle.css">
+    <link rel="stylesheet" href="authstyle.css">
+    <link rel="shortcut icon" href="images/logo.png">
+</head>
+<body>
+    <header id="navbar">
+        <nav>
+            <div class="logo"><img src="images/logo2.png" alt="Amala Ibadan Logo"></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order Online</a></li>
+                <li><a href="track.html">Track Order</a></li>
+                <ul class="nav-links" id="authNavSlot" style="display:contents;"></ul>
+            </ul>
+            <img src="images/menu3.png" alt="Menu Icon" class="menu-btn">
+        </nav>
+    </header>
+
+    <section class="auth-page">
+        <div class="auth-box">
+            <h1>Create an Account</h1>
+            <p class="auth-subtitle">Save your details and track your order history</p>
+
+            <form id="signupForm">
+                <label>Full Name
+                    <input type="text" id="signupName" required>
+                </label>
+                <label>Email
+                    <input type="email" id="signupEmail" required>
+                </label>
+                <label>Phone Number
+                    <input type="tel" id="signupPhone" placeholder="08012345678">
+                </label>
+                <label>Password
+                    <input type="password" id="signupPassword" minlength="6" required>
+                </label>
+                <p id="signupError" class="form-error"></p>
+                <button type="submit" id="signupBtn" class="place-order-btn">Sign Up</button>
+            </form>
+
+            <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+        </div>
+    </section>
+
+    <script src="menuscript.js"></script>
+    <script src="authHelper.js"></script>
+    <script src="signupscript.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders | Admin</title>
+    <link rel="stylesheet" href="adminstyle.css">
+    <link rel="shortcut icon" href="images/logo.png">
+</head>
+<body>
+    <header class="admin-header">
+        <h1>Amala Ibadan <span>Admin</span></h1>
+        <nav class="admin-nav">
+            <a href="admin-orders.html" class="active-tab">Orders</a>
+            <a href="admin-menu.html">Menu</a>
+        </nav>
+    </header>
+
+    <main class="admin-container">
+        <div class="admin-toolbar">
+            <div class="filter-pills" id="statusFilters">
+                <button class="filter-pill active-pill" data-status="all">All</button>
+                <button class="filter-pill" data-status="pending">Pending</button>
+                <button class="filter-pill" data-status="confirmed">Confirmed</button>
+                <button class="filter-pill" data-status="preparing">Preparing</button>
+                <button class="filter-pill" data-status="ready">Ready</button>
+                <button class="filter-pill" data-status="delivered">Delivered</button>
+                <button class="filter-pill" data-status="cancelled">Cancelled</button>
+            </div>
+            <button class="btn-secondary" onclick="loadOrders()">↻ Refresh</button>
+        </div>
+
+        <div id="statsBar" style="margin-bottom: 18px; color:#666; font-size:0.9rem;"></div>
+
+        <div class="orders-table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order #</th>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th>Type</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Placed</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                    <tr><td colspan="8" class="loading-text">Loading orders...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="adminorders.js"></script>
+</body>
+</html>

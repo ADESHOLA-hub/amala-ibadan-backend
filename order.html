@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online | Amala Ibadan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="orderstyle.css">
+    <link rel="shortcut icon" href="images/logo.png">
+</head>
+<body>
+
+    <!-- Minimal top bar -->
+    <header class="order-topbar">
+        <a href="index.html" class="topbar-logo">
+            <img src="images/logo2.png" alt="Amala Ibadan">
+        </a>
+        <a href="index.html" class="topbar-home">← Home</a>
+    </header>
+
+    <div class="order-layout">
+
+        <!-- LEFT: Menu -->
+        <main class="menu-panel">
+            <div class="menu-panel-inner">
+
+                <div class="menu-heading">
+                    <h1>What would you like?</h1>
+                    <p>Fresh, made to order. Pick your items and checkout.</p>
+                </div>
+
+                <!-- Category filter links — same IDs/classes as before -->
+                <div id="categoryFilters" class="category-scroll"></div>
+
+                <!-- Menu grid — same ID as before -->
+                <div id="menuList" class="order-menu-grid">
+                    <div class="skeleton-wrap">
+                        <div class="skeleton-row"></div>
+                        <div class="skeleton-row"></div>
+                        <div class="skeleton-row"></div>
+                        <div class="skeleton-row"></div>
+                        <div class="skeleton-row"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT: Cart + Checkout -->
+        <aside class="cart-panel">
+            <div class="cart-inner">
+                <h2 class="cart-heading">Your Order</h2>
+
+                <!-- Cart items — same ID as before -->
+                <div id="cartItems" class="cart-items">
+                    <p class="empty-cart-text">Your cart is empty</p>
+                </div>
+
+                <!-- Totals — same IDs as before -->
+                <div class="cart-summary">
+                    <div class="cart-row"><span>Subtotal</span><span id="subtotalDisplay">₦0</span></div>
+                    <div class="cart-row"><span>Tax</span><span id="taxDisplay">—</span></div>
+                    <div class="cart-row cart-total"><span>Total</span><span id="totalDisplay">₦0</span></div>
+                </div>
+
+                <!-- Checkout form — same IDs as before -->
+                <div id="checkoutForm">
+                    <label>Order Type
+                        <select id="orderType">
+                            <option value="takeaway">Takeaway / Pickup</option>
+                            <option value="delivery">Delivery</option>
+                        </select>
+                    </label>
+
+                    <div id="deliveryFields" style="display:none;">
+                        <label>Delivery Address
+                            <textarea id="deliveryAddress" rows="2" placeholder="Enter full delivery address"></textarea>
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Full Name
+                            <input type="text" id="customerName" placeholder="Your name">
+                        </label>
+                        <label>Phone Number
+                            <input type="tel" id="customerPhone" placeholder="08012345678">
+                        </label>
+                    </div>
+
+                    <label>Notes <span class="optional-label">optional</span>
+                        <textarea id="orderNotes" rows="2" placeholder="Spice level, allergies, special requests..."></textarea>
+                    </label>
+
+                    <p id="formError" class="form-error"></p>
+                    <button type="button" id="placeOrderBtn" class="place-order-btn whatsapp-order-btn">
+                        📲 Send Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!--==============================
+        CATERING PACKAGES — content rendered dynamically by
+        cateringSection.js from /api/catering, editable via
+        admin-catering.html. Separate from the cart above —
+        each package links out to WhatsApp instead.
+    ================================-->
+    <section class="premium-menu" id="catering">
+
+        <div class="menu-heading">
+            <span class="sub-title">✦ Luxury Catering Experience ✦</span>
+            <h2>Our Signature Menu</h2>
+            <p>
+                Every package is carefully curated to deliver an unforgettable dining experience for weddings,
+                corporate events, birthdays, owambe celebrations and private gatherings.
+            </p>
+        </div>
+
+        <!-- Category tabs — populated by cateringSection.js -->
+        <div class="menu-tabs">
+            <p class="loading-text">Loading catering menu...</p>
+        </div>
+
+        <!-- .menu-category blocks are inserted here dynamically, right after .menu-tabs -->
+
+    </section>
+
+    <!-- Mobile floating cart bar -->
+    <div id="mobileCartBar" class="mobile-cart-bar" style="display:none;" onclick="openMobileCart()">
+        <div class="mobile-bar-left">
+            <span class="mobile-count" id="mobileCartCount">0</span>
+            <span>View order</span>
+        </div>
+        <span id="mobileCartTotal">₦0</span>
+    </div>
+
+    <!-- Mobile cart drawer -->
+    <div id="mobileOverlay" class="mobile-overlay" onclick="closeMobileCart()"></div>
+    <div id="mobileDrawer" class="mobile-drawer">
+        <div class="drawer-pill"></div>
+        <div class="drawer-top">
+            <h3>Your Order</h3>
+            <button onclick="closeMobileCart()" class="drawer-close">✕</button>
+        </div>
+        <div id="mobileCartItems" class="cart-items"></div>
+        <div class="cart-summary" id="mobileCartSummary" style="display:none;">
+            <div class="cart-row"><span>Subtotal</span><span id="mobileSubtotal">₦0</span></div>
+            <div class="cart-row"><span>Tax (7.5%)</span><span id="mobileTax">₦0</span></div>
+            <div class="cart-row cart-total"><span>Total</span><span id="mobileTotal">₦0</span></div>
+        </div>
+
+        <!-- Full checkout form inside mobile drawer -->
+        <div id="mobileCheckoutForm" style="display:none;">
+            <div class="mobile-form-divider">Checkout</div>
+
+            <label>Order Type
+                <select id="mobileOrderType">
+                    <option value="takeaway">Takeaway / Pickup</option>
+                    <option value="delivery">Delivery</option>
+                </select>
+            </label>
+
+            <div id="mobileDeliveryFields" style="display:none;">
+                <label>Delivery Address
+                    <textarea id="mobileDeliveryAddress" rows="2" placeholder="Enter full delivery address"></textarea>
+                </label>
+            </div>
+
+            <label>Full Name
+                <input type="text" id="mobileCustomerName" placeholder="Your name">
+            </label>
+
+            <label>Phone Number
+                <input type="tel" id="mobileCustomerPhone" placeholder="08012345678">
+            </label>
+
+            <label>Notes <span class="optional-label">optional</span>
+                <textarea id="mobileOrderNotes" rows="2" placeholder="Spice level, allergies..."></textarea>
+            </label>
+
+            <p id="mobileFormError" class="form-error"></p>
+            <button type="button" id="mobilePlaceOrderBtn" class="place-order-btn whatsapp-order-btn">📲 Send Order via WhatsApp</button>
+        </div>
+    </div>
+
+    <script src="orderscript.js"></script>
+    <script src="cateringSection.js"></script>
+    <script src="authHelper.js"></script>
+    <script>
+        // Mobile cart drawer — updates when cart changes
+        const _origRenderCart = renderCart;
+        renderCart = function() {
+            _origRenderCart();
+            syncMobileCart();
+        };
+
+        function syncMobileCart() {
+            const entries = Object.entries(cart);
+            const isEmpty = entries.length === 0;
+            const bar = document.getElementById("mobileCartBar");
+            if (!bar) return;
+            bar.style.display = isEmpty ? "none" : "flex";
+
+            const totalItems = entries.reduce((s, [,{quantity}]) => s + quantity, 0);
+            const subtotal = entries.reduce((s, [,{item, quantity}]) => s + item.price * quantity, 0);
+            const tax = parseFloat((subtotal * 0.075).toFixed(2));
+            const total = subtotal + tax;
+
+            document.getElementById("mobileCartCount").textContent = totalItems;
+            document.getElementById("mobileCartTotal").textContent = `₦${total.toLocaleString()}`;
+
+            // Sync drawer items
+            document.getElementById("mobileCartItems").innerHTML = document.getElementById("cartItems").innerHTML;
+
+            // Sync drawer totals
+            const drawerSummary = document.getElementById("mobileCartSummary");
+            drawerSummary.style.display = isEmpty ? "none" : "block";
+            if (!isEmpty) {
+                document.getElementById("mobileSubtotal").textContent = `₦${subtotal.toLocaleString()}`;
+                document.getElementById("mobileTax").textContent = `₦${tax.toLocaleString()}`;
+                document.getElementById("mobileTotal").textContent = `₦${total.toLocaleString()}`;
+            }
+
+            // Show/hide mobile checkout form
+            document.getElementById("mobileCheckoutForm").style.display = isEmpty ? "none" : "block";
+
+            // Pre-fill mobile form from desktop form values
+            try {
+                const name = document.getElementById("customerName").value;
+                const phone = document.getElementById("customerPhone").value;
+                if (name) document.getElementById("mobileCustomerName").value = name;
+                if (phone) document.getElementById("mobileCustomerPhone").value = phone;
+            } catch(e) {}
+        }
+
+        function openMobileCart() {
+            syncMobileCart();
+            document.getElementById("mobileDrawer").classList.add("open");
+            document.getElementById("mobileOverlay").classList.add("open");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeMobileCart() {
+            document.getElementById("mobileDrawer").classList.remove("open");
+            document.getElementById("mobileOverlay").classList.remove("open");
+            document.body.style.overflow = "";
+        }
+
+        // Order type toggle in mobile drawer
+        document.getElementById("mobileOrderType").addEventListener("change", (e) => {
+            document.getElementById("mobileDeliveryFields").style.display =
+                e.target.value === "delivery" ? "block" : "none";
+        });
+
+        // Mobile place order button — opens WhatsApp
+        document.getElementById("mobilePlaceOrderBtn").addEventListener("click", () => {
+            // Sync mobile form values into desktop form fields so handleWhatsAppOrder can read them
+            const mName = document.getElementById("mobileCustomerName").value.trim();
+            const mPhone = document.getElementById("mobileCustomerPhone").value.trim();
+            const mType = document.getElementById("mobileOrderType").value;
+            const mAddress = document.getElementById("mobileDeliveryAddress").value.trim();
+            const mNotes = document.getElementById("mobileOrderNotes").value.trim();
+
+            document.getElementById("customerName").value = mName;
+            document.getElementById("customerPhone").value = mPhone;
+            document.getElementById("orderType").value = mType;
+            document.getElementById("deliveryAddress").value = mAddress;
+            document.getElementById("orderNotes").value = mNotes;
+
+            // Show errors in mobile form
+            const mobileError = document.getElementById("mobileFormError");
+            mobileError.textContent = "";
+
+            if (!mName) { mobileError.textContent = "Please enter your name."; return; }
+            if (!mPhone) { mobileError.textContent = "Please enter your phone number."; return; }
+            if (mType === "delivery" && !mAddress) { mobileError.textContent = "Please enter your delivery address."; return; }
+
+            // Use the same WhatsApp function from orderscript.js
+            handleWhatsAppOrder();
+        });
+    </script>
+</body>
+</html>

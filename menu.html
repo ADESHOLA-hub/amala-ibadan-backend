@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amala Ibadan</title>
     <link rel="stylesheet" href="menustyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="order-embed.css">
     <link rel="shortcut icon" href="images/logo.png">
 </head>
 <body>
@@ -33,313 +36,1260 @@
 
 <section class="menu-intro">
   <h2>Our Menu</h2>
-  <p>From hearty soups to rich swallows and premium proteins — our meals bring Nigerian culture to your table.</p>
-
-  <ul class="menu-nav">
-    <li><a href="#" onclick="showContent('all')">All</a></li>
-    <li><a href="#" onclick="showContent('soup')">Soups</a></li>
-    <li><a href="#" onclick="showContent('meals')">Meals</a></li>
-    <li><a href="#" onclick="showContent('swallow')">Swallows</a></li>
-    <li><a href="#" onclick="showContent('protein')">Proteins</a></li>
-    <li><a href="#" onclick="showContent('extra')">Extras</a></li>
-  </ul>
+  <p>From hearty soups to rich swallows and premium proteins — our meals bring Nigerian culture to your table. Browse, add to your cart, and order below.</p>
 </section>
 
-    <section data-content="menuitems" class="menu-section flavor-fusion-menu">
-        <h2 class="taste-buds-header"></h2>
-        <div class="menu-header2">
-            <h1>Swallow Delights</h1>
+<section id="orderSection">
+    <div class="order-layout">
 
+        <!-- LEFT: Menu -->
+        <main class="menu-panel">
+            <div class="menu-panel-inner">
+
+                <div class="menu-heading">
+                    <h1>What would you like?</h1>
+                    <p>Fresh, made to order. Pick your items and checkout.</p>
+                </div>
+
+                <!-- Category filter links — populated by orderscript.js -->
+                <div id="categoryFilters" class="category-scroll"></div>
+
+                <!-- Menu grid — populated by orderscript.js -->
+                <div id="menuList" class="order-menu-grid">
+                    <div class="skeleton-wrap">
+                        <div class="skeleton-row"></div>
+                        <div class="skeleton-row"></div>
+                        <div class="skeleton-row"></div>
+                        <div class="skeleton-row"></div>
+                        <div class="skeleton-row"></div>
+                    </div>
+                </div>
             </div>
-            <div class="gourmet-selections">
-    
-                <div class="dish-item">
-                    <img src="images/amalaswallow.jpg" alt="">
-                    <h3 class="dish-name">Amala</h3>
-                    <span class="dish-price">₦300</span>
-                </div>
-    
-                <div class="dish-item">
-                   <img src="images/Swallow.png" alt="">
-                    <h3 class="dish-name">Eba</h3>
-                    <span class="dish-price">₦300</span>
-                </div>
-    
-                <div class="dish-item">
-                    <img src="images/semovita.webp" alt="">
-                    <h3 class="dish-name">Semo</h3>
-                    <span class="dish-price">₦300</span>
-                </div>
-    
-                <div class="dish-item">
-                    <img src="images/poundoyam.jpg" alt="">
-                    <h3 class="dish-name">Poundo</h3>
-                    <span class="dish-price">₦300</span>
+        </main>
+
+        <!-- RIGHT: Cart + Checkout -->
+        <aside class="cart-panel">
+            <div class="cart-inner">
+                <h2 class="cart-heading">Your Order</h2>
+
+                <div id="cartItems" class="cart-items">
+                    <p class="empty-cart-text">Your cart is empty</p>
                 </div>
 
-              <div class="dish-item">
-                <img src="images/fufumeal.jpg" alt="">
-                <h3 class="dish-name">Fufu</h3>
-                <span class="dish-price">₦300</span>
+                <div class="cart-summary">
+                    <div class="cart-row"><span>Subtotal</span><span id="subtotalDisplay">₦0</span></div>
+                    <div class="cart-row"><span>Tax</span><span id="taxDisplay">—</span></div>
+                    <div class="cart-row cart-total"><span>Total</span><span id="totalDisplay">₦0</span></div>
+                </div>
+
+                <div id="checkoutForm">
+                    <label>Order Type
+                        <select id="orderType">
+                            <option value="takeaway">Takeaway / Pickup</option>
+                            <option value="delivery">Delivery</option>
+                        </select>
+                    </label>
+
+                    <div id="deliveryFields" style="display:none;">
+                        <label>Delivery Address
+                            <textarea id="deliveryAddress" rows="2" placeholder="Enter full delivery address"></textarea>
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Full Name
+                            <input type="text" id="customerName" placeholder="Your name">
+                        </label>
+                        <label>Phone Number
+                            <input type="tel" id="customerPhone" placeholder="08012345678">
+                        </label>
+                    </div>
+
+                    <label>Notes <span class="optional-label">optional</span>
+                        <textarea id="orderNotes" rows="2" placeholder="Spice level, allergies, special requests..."></textarea>
+                    </label>
+
+                    <p id="formError" class="form-error"></p>
+                    <button type="button" id="placeOrderBtn" class="place-order-btn whatsapp-order-btn">
+                        📲 Send Order via WhatsApp
+                    </button>
+                </div>
             </div>
+        </aside>
+    </div>
+
+    <!-- Mobile floating cart bar -->
+    <div id="mobileCartBar" class="mobile-cart-bar" style="display:none;" onclick="openMobileCart()">
+        <div class="mobile-bar-left">
+            <span class="mobile-count" id="mobileCartCount">0</span>
+            <span>View order</span>
+        </div>
+        <span id="mobileCartTotal">₦0</span>
+    </div>
+
+    <!-- Mobile cart drawer -->
+    <div id="mobileOverlay" class="mobile-overlay" onclick="closeMobileCart()"></div>
+    <div id="mobileDrawer" class="mobile-drawer">
+        <div class="drawer-pill"></div>
+        <div class="drawer-top">
+            <h3>Your Order</h3>
+            <button onclick="closeMobileCart()" class="drawer-close">✕</button>
+        </div>
+        <div id="mobileCartItems" class="cart-items"></div>
+        <div class="cart-summary" id="mobileCartSummary" style="display:none;">
+            <div class="cart-row"><span>Subtotal</span><span id="mobileSubtotal">₦0</span></div>
+            <div class="cart-row"><span>Tax</span><span id="mobileTax">₦0</span></div>
+            <div class="cart-row cart-total"><span>Total</span><span id="mobileTotal">₦0</span></div>
+        </div>
+
+        <div id="mobileCheckoutForm" style="display:none;">
+            <div class="mobile-form-divider">Checkout</div>
+
+            <label>Order Type
+                <select id="mobileOrderType">
+                    <option value="takeaway">Takeaway / Pickup</option>
+                    <option value="delivery">Delivery</option>
+                </select>
+            </label>
+
+            <div id="mobileDeliveryFields" style="display:none;">
+                <label>Delivery Address
+                    <textarea id="mobileDeliveryAddress" rows="2" placeholder="Enter full delivery address"></textarea>
+                </label>
             </div>
-          </div>
 
-              <div class="menu-header2">
-                <h1>MEALS</h1>
+            <label>Full Name
+                <input type="text" id="mobileCustomerName" placeholder="Your name">
+            </label>
+
+            <label>Phone Number
+                <input type="tel" id="mobileCustomerPhone" placeholder="08012345678">
+            </label>
+
+            <label>Notes <span class="optional-label">optional</span>
+                <textarea id="mobileOrderNotes" rows="2" placeholder="Spice level, allergies..."></textarea>
+            </label>
+
+            <p id="mobileFormError" class="form-error"></p>
+            <button type="button" id="mobilePlaceOrderBtn" class="place-order-btn whatsapp-order-btn">📲 Send Order via WhatsApp</button>
+        </div>
+    </div>
+
+    <p class="order-message">
+        <span>Prefer another way? You can also order via <a href="https://chowdeck.com/store/ikotun/restaurants/amala-ibadan" class="hover-link">ChowDeck</a> or message us directly on <a href="https://wa.me/2347047777521?text=Hello!%20I%20would%20like%20to%20place%20an%20order." class="hover-link"><strong>WhatsApp</strong></a>.</span>
+    </p>
+</section>
+
+<!--==============================
+    CATERING PACKAGES — fully static, no backend.
+    Each package links out via WhatsApp / a "#" placeholder link.
+================================-->
+<section class="premium-menu" id="catering">
+
+    <div class="menu-heading">
+
+        <span class="sub-title">
+            ✦ Luxury Catering Experience ✦
+        </span>
+
+        <h2>
+            Our Signature Menu
+        </h2>
+
+        <p>
+            Every package is carefully curated to deliver an unforgettable dining experience for weddings,
+            corporate events, birthdays, owambe celebrations and private gatherings.
+        </p>
+
+    </div>
+
+    <!-- Category Navigation -->
+
+<div class="menu-tabs">
+
+    <button class="active" data-category="all">All</button>
+
+    <button data-category="breakfast">Breakfast</button>
+
+    <button data-category="owambe">Owambe</button>
+
+    <button data-category="specials">Specials</button>
+
+    <button data-category="afterparty">After Party</button>
+
+    <button data-category="starters">Starters</button>
+
+    <button data-category="lunchpacks">Lunch Packs</button>
+
+    <button data-category="foodbowls">Food Bowls</button>
+</div>
+
+
+
+    <!--==============================
+        BREAKFAST
+    ===============================-->
+
+    <div class="menu-category" data-category="breakfast">
+
+        <div class="category-title">
+
+            <h3>Breakfast Spread</h3>
+
+            <p>Minimum of 50 Guests</p>
+
+        </div>
+
+
+
+        <div class="menu-grid">
+
+
+            <!-- CARD -->
+
+            <article class="menu-card">
+
+                <span class="price">₦7,500</span>
+
+                <span class="ribbon">Popular</span>
+
+                <div class="menu-icon">
+                    🥞
                 </div>
-                <div class="gourmet-selections">
-        
-                    <div class="dish-item">
-                        <img src="images/jolofrice.jpg" alt="">
-                        <h3 class="dish-name">Jollof Rice</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦1,200</span>
-                    </div>
-        
-                    <div class="dish-item">
-                        <img src="images/friedrice.jpg" alt="">
-                        <h3 class="dish-name">Fried Rice</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦1,500</span>
-                    </div>
-        
-                    <div class="dish-item">
-                        <img src="images/asunrice.webp" alt="">
-                        <h3 class="dish-name">Asun rice</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦2,000</span>
-                    </div>
-        
-                    <div class="dish-item">
-                        <img src="images/whiterice.jpg" alt="">
-                        <h3 class="dish-name">White rice</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦1,000</span>
-                    </div>
 
-                    <div class="dish-item">
-                        <img src="images/villagerice.jpg" alt="">
-                        <h3 class="dish-name">village rice</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦2,000</span>
-                    </div>
+                <h4>Breakfast Option One</h4>
 
-                    <div class="dish-item">
-                        <img src="images/ofada.webp" alt="">
-                        <h3 class="dish-name">Ofada rice</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦1,000</span>
-                    </div>
+                <ul>
 
-                    <div class="dish-item">
-                        <img src="images/stirfry.jpg" alt="">
-                        <h3 class="dish-name">Stirfry Spaghetti</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦1,000</span>
-                    </div>
+                    <li>Club Sandwich</li>
 
-                    <div class="dish-item">
-                        <img src="images/specialspag.jpg" alt="">
-                        <h3 class="dish-name">Special Spaghetti</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦1,000</span>
-                    </div>
+                    <li>Oat Porridge with Fruits</li>
 
-                    <div class="dish-item">
-                        <img src="images/pottage.webp" alt="">
-                        <h3 class="dish-name">Yam Porridge</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦1,000</span>
-                    </div>
+                    <li>Boiled Yam</li>
 
-                    <div class="dish-item">
-                        <img src="images/yam.png" alt="">
-                        <h3 class="dish-name">White Yam</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦1,000</span>
-                    </div>
+                    <li>Fish Sauce</li>
 
-                    <div class="dish-item">
-                        <img src="images/pottage.webp" alt="">
-                        <h3 class="dish-name">Yamarita</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦1,000</span>
-                    </div>
+                    <li>Meatballs</li>
 
-                    <div class="dish-item">
-                        <img src="images/ewa.jpeg" alt="">
-                        <h3 class="dish-name">Ewa Agoyin</h3>
-                        <p class="dish-details">per portion</p>
-                        <span class="dish-price">₦800</span>
-                    </div>
-                  </div>
+                    <li>Watermelon Wedges</li>
 
-                  
-              <div class="menu-header2">
-                <h1>PROTEIN</h1>
+                    <li>Tea & Beverages</li>
+
+                </ul>
+
+                <a href="#" class="menu-btn">
+                    Book Package
+                </a>
+
+            </article>
+
+
+
+
+            <article class="menu-card">
+
+                <span class="price">₦8,500</span>
+
+                <div class="menu-icon">
+                    ☕
                 </div>
-                <div class="gourmet-selections">
-        
-                    <div class="dish-item">
-                        <img src="images/ponmo.webp" alt="">
-                        <h3 class="dish-name">Ponmo</h3>
-                        <span class="dish-price">₦300</span>
-                    </div>
-        
-                    <div class="dish-item">
-                        <img src="images/egg.jpg" alt="">
-                        <h3 class="dish-name">Egg</h3>
-                        <span class="dish-price">₦400</span>
-                    </div>
-        
-                    <div class="dish-item">
-                        <img src="images/assorted.jpg" alt="">
-                        <h3 class="dish-name">Assorted</h3>
-                        <span class="dish-price">₦200</span>
-                    </div>
-        
-                    <div class="dish-item">
-                        <img src="images/beef.jpg" alt="">
-                        <h3 class="dish-name">Beef</h3>
-                        <span class="dish-price">₦500</span>
-                    </div>
 
-                    <div class="dish-item">
-                        <img src="images/turkey.jpg" alt="">
-                        <h3 class="dish-name">Turkey</h3>
-                        <span class="dish-price">₦3,000-₦4000</span>
-                    </div>
+                <h4>Breakfast Option Two</h4>
 
-                    <div class="dish-item">
-                        <img src="images/chicken.jpg" alt="">
-                        <h3 class="dish-name">Chicken</h3>
-                        <span class="dish-price">₦2,500-₦4,000</span>
-                    </div>
+                <ul>
 
-                    <div class="dish-item">
-                        <img src="images/snail.jpg" alt="">
-                        <h3 class="dish-name">Peppered snails</h3>
-                        <span class="dish-price">₦2,500</span>
-                    </div>
+                    <li>Club Sandwich</li>
 
-                    <div class="dish-item">
-                        <img src="images/gizzard.webp" alt="">
-                        <h3 class="dish-name">gizzard</h3>
-                        <span class="dish-price">₦1,500</span>
-                    </div>
+                    <li>Pancakes</li>
 
-                    <div class="dish-item">
-                        <img src="images/roundfish.jpg" alt="">
-                        <h3 class="dish-name">Panla Fish</h3>
-                        <span class="dish-price">₦2,000-₦4,000</span>
-                    </div>
+                    <li>Chicken Wrap</li>
 
-                    <div class="dish-item">
-                        <img src="images/roundfish.jpg" alt="">
-                        <h3 class="dish-name">Smoked Panla</h3>
-                        <span class="dish-price">₦400</span>
-                    </div>
+                    <li>Chicken Wings</li>
 
-                    <div class="dish-item">
-                        <img src="images/croake.jpg" alt="">
-                        <h3 class="dish-name">Croaker Fish</h3>
-                        <span class="dish-price">₦3,000-₦4,000</span>
-                    </div>
+                    <li>Boiled Plantain</li>
 
-                    <div class="dish-item">
-                        <img src="images/titus.jpg" alt="">
-                        <h3 class="dish-name">Titus Fish</h3>
-                        <span class="dish-price">₦1,000</span>
-                    </div>
+                    <li>Fish Sauce</li>
 
-                    <div class="dish-item">
-                        <img src="images/ogunfe.jpg" alt="">
-                        <h3 class="dish-name">Ogunfe</h3>
-                        <span class="dish-price">₦2,000</span>
-                    </div>
+                    <li>Scrambled Egg</li>
 
-                    <div class="dish-item">
-                        <img src="images/catfish.jpg" alt="">
-                        <h3 class="dish-name">Catfish</h3>
-                        <span class="dish-price">₦2,000-₦3,000</span>
-                    </div>
-                  </div>
+                    <li>Sausage</li>
 
-                  <div class="menu-header2">
-                    <h1>EXTRA</h1>
-                    </div>
-                    <div class="gourmet-selections">
+                    <li>Fruit Cup</li>
+
+                    <li>Tea & Beverages</li>
+
+                </ul>
+
+                <a href="#" class="menu-btn">
+
+                    Book Package
+
+                </a>
+
+            </article>
+
+
+
+
+            <article class="menu-card featured">
+
+                <span class="price">₦10,000</span>
+
+                <span class="ribbon gold">
+                    Premium
+                </span>
+
+                <div class="menu-icon">
+                    👑
+                </div>
+
+                <h4>Breakfast Option Three</h4>
+
+                <ul>
+
+                    <li>Mini Sliders</li>
+
+                    <li>Mini Tortilla Wraps</li>
+
+                    <li>Pasta Salad</li>
+
+                    <li>Avocado Salad</li>
+
+                    <li>Fruit Cup</li>
+
+                    <li>Fresh Juice</li>
+
+                    <li>Zobo</li>
+
+                    <li>Tea & Beverages</li>
+
+                    <li>Waffles</li>
+
+                    <li>Pancakes</li>
+
+                    <li>Chicken Kebab</li>
+
+                </ul>
+
+                <a href="#" class="menu-btn">
+
+                    Book Package
+
+                </a>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+
+
+
+    <!--==============================
+        OWAMBE
+    ===============================-->
+
+
+
+    <div class="menu-category" data-category="owambe">
+
+        <div class="category-title">
+
+            <h3>Owambe Packages</h3>
+
+            <p>Minimum of 100 Guests</p>
+
+        </div>
+
+
+
+        <div class="menu-grid">
+
+
+
+            <article class="menu-card">
+
+                <span class="price">₦8,000</span>
+
+                <div class="menu-icon">
+
+                    🍛
+
+                </div>
+
+                <h4>Owambe Option One</h4>
+
+                <ul>
+
+                    <li>Signature Abula</li>
+
+                    <li>Party Jollof Rice</li>
+
+                    <li>Fried Rice</li>
+
+                    <li>Ofada Rice</li>
+
+                    <li>Pounded Yam</li>
+
+                    <li>Yam Potage</li>
+
+                    <li>Peppered Chicken</li>
+
+                </ul>
+
+                <a href="#" class="menu-btn">
+
+                    Book Package
+
+                </a>
+
+            </article>
+
+
+
+            <article class="menu-card featured">
+
+                <span class="price">₦10,000</span>
+
+                <span class="ribbon gold">
+
+                    Best Seller
+
+                </span>
+
+                <div class="menu-icon">
+
+                    🍖
+
+                </div>
+
+                <h4>Owambe Option Two</h4>
+
+                <ul>
+
+                    <li>2 Protein Selection</li>
+
+                    <li>Signature Abula</li>
+
+                    <li>Party Rice</li>
+
+                    <li>Ofada Rice</li>
+
+                    <li>Pounded Yam</li>
+
+                    <li>Peppered Fish</li>
+
+                    <li>Fresh Fish</li>
+
+                </ul>
+
+                <a href="#" class="menu-btn">
+
+                    Book Package
+
+                </a>
+
+            </article>
+
+        </div>
+
+    </div>
+
+
+
+
+    <!--==============================
+        SPECIALS
+    ===============================-->
+
+
+
+    <div class="menu-category" data-category="specials">
+
+        <div class="category-title">
+
+            <h3>Chef's Specials</h3>
+
+        </div>
+
+        <div class="menu-grid">
+
+
+            <article class="menu-card">
+
+                <span class="price">₦10,000</span>
+
+                <div class="menu-icon">
+
+                    🍲
+
+                </div>
+
+                <h4>Ewa Aganyin Special</h4>
+
+                <p>
+
+                    Served with Plantain, Beef, Ponmo, Round Fish and our Signature Aganyin Sauce.
+
+                </p>
+
+            </article>
+
+
+
+            <article class="menu-card">
+
+                <span class="price">₦12,000</span>
+
+                <div class="menu-icon">
+
+                    🍚
+
+                </div>
+
+                <h4>Steamed Rice Deluxe</h4>
+
+                <p>
+
+                    Fresh Fish Stew, Peppered Assorted Meat and Plantain.
+
+                </p>
+
+            </article>
+
+
+
+            <article class="menu-card featured">
+
+                <span class="price">₦15,000</span>
+
+                <div class="menu-icon">
+
+                    🦀
+
+                </div>
+
+                <h4>Seafood Okra</h4>
+
+                <p>
+
+                    Crab, Snail, Calamari, Prawn, Fresh Fish with Pounded Yam.
+
+                </p>
+
+            </article>
+
             
-                        <div class="dish-item">
-                            <img src="images/moimoi.jpg" alt="">
-                            <h3 class="dish-name">Moi-Moi</h3>
-                            <span class="dish-price">₦500</span>
-                        </div>
-            
-                        <div class="dish-item">
-                            <img src="images/plantain.jpg" alt="">
-                            <h3 class="dish-name">Plantain</h3>
-                            <span class="dish-price">₦500</span>
-                        </div>
+        </div>
 
-                        <div class="dish-item">
-                            <img src="images/salad.jpg" alt="">
-                            <h3 class="dish-name">Salad</h3>
-                            <span class="dish-price">₦500</span>
-                        </div>
+    </div>
 
-                        </div>
+<!--==============================
+        AFTER PARTY
+================================-->
 
-                        <div class="menu-header2">
-                            <h1>SOUPS/STEWS</h1>
-                            </div>
-                            <div class="gourmet-selections">
-                    
-                                <div class="dish-item">
-                                    <img src="images/egusisoup.webp" alt="">
-                                    <h3 class="dish-name">Egusi</h3>
-                                    <span class="dish-price">₦500</span>
-                                </div>
-                    
-                                <div class="dish-item">
-                                    <img src="images/efo-riro.jpg" alt="">
-                                    <h3 class="dish-name">Efo-ri-ro</h3>
-                                    <span class="dish-price">₦500</span>
-                                </div>
+<div class="menu-category" data-category="afterparty">
 
-                                <div class="dish-item">
-                                    <img src="images/efo-riro.jpg" alt="">
-                                    <h3 class="dish-name">Efo-ri-ro</h3>
-                                    <span class="dish-price">₦500</span>
-                                </div>
-        
-                                <div class="dish-item">
-                                    <img src="images/ewedu.jpg" alt="">
-                                    <h3 class="dish-name">Ewedu</h3>
-                                    <p>only for amala</p>
-                                </div>
+    <div class="category-title">
 
-                                <div class="dish-item">
-                                    <img src="images/gbegiri.jpeg" alt="">
-                                    <h3 class="dish-name">Gbegiri</h3>
-                                    <p>only for amala</p>
-                                </div>
-        
-                                </div>
-                                <div class="order-message">
-                                    <p>Want to order? You can place your order easily via <a href="https://chowdeck.com/store/ikotun/restaurants/amala-ibadan" class="hover-link">ChowDeck</a> or send us a message on <a href="https://wa.me/2347047777521?text=Hello!%20I%20would%20like%20to%20place%20an%20order." class="hover-link"><strong>WhatsApp</strong></a> for quick assistance!</p>
-                                    <p>Just click the buttons below to get started:</p>
-                                </div>
-                                
+        <h3>After Party Menu</h3>
 
-            </div>
-    
-    </section>
+        <p>Perfect for late-night celebrations</p>
 
-    
+    </div>
 
-    <section class="soup-section" >
+    <div class="menu-grid">
+
+        <article class="menu-card">
+
+            <span class="price">₦5,000</span>
+
+            <div class="menu-icon">🔥</div>
+
+            <h4>Spicy Asun</h4>
+
+            <p>
+                Tender, spicy grilled goat meat tossed in our signature pepper mix.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦5,000</span>
+
+            <div class="menu-icon">🍝</div>
+
+            <h4>Spicy Spaghetti</h4>
+
+            <p>
+                Stir-fried spicy spaghetti served with juicy beef chunks.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card featured">
+
+            <span class="price">₦8,000</span>
+
+            <span class="ribbon gold">Popular</span>
+
+            <div class="menu-icon">🍗</div>
+
+            <h4>Creamy Chicken Pasta</h4>
+
+            <p>
+                Rich creamy pasta loaded with tender chicken chunks.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦5,000</span>
+
+            <div class="menu-icon">🍟</div>
+
+            <h4>Yam or Plantain Fries</h4>
+
+            <p>
+                Served with pepper sauce and your choice of Chicken, Turkey or Fish Cuts.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦7,000</span>
+
+            <div class="menu-icon">🦃</div>
+
+            <h4>Fries & Whole Turkey</h4>
+
+            <p>
+                Crispy fries paired with pepper sauce and an uncut turkey.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦10,000</span>
+
+            <div class="menu-icon">🐟</div>
+
+            <h4>Fries & Whole Fish</h4>
+
+            <p>
+                Yam or Plantain Fries served with pepper sauce and a whole grilled fish.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+    </div>
+
+</div>
+
+
+<!--==============================
+        STARTERS
+================================-->
+
+<div class="menu-category" data-category="starters">
+
+    <div class="category-title">
+
+        <h3>Starters</h3>
+
+        <p>Begin your dining experience beautifully</p>
+
+    </div>
+
+    <div class="menu-grid">
+
+        <article class="menu-card">
+
+            <span class="price">₦5,000</span>
+
+            <div class="menu-icon">🍲</div>
+
+            <h4>Goat Meat Pepper Soup</h4>
+
+            <p>
+
+                Rich spicy pepper soup served with a fresh dinner roll.
+
+            </p>
+
+            <a href="#" class="menu-btn">
+
+                Order Now
+
+            </a>
+
+        </article>
+
+
+
+        <article class="menu-card featured">
+
+            <span class="price">₦5,000</span>
+
+            <span class="ribbon gold">
+
+                Chef's Pick
+
+            </span>
+
+            <div class="menu-icon">🐟</div>
+
+            <h4>Catfish Pepper Soup</h4>
+
+            <p>
+
+                Fresh catfish cooked in our signature pepper soup spices and served with a dinner roll.
+
+            </p>
+
+            <a href="#" class="menu-btn">
+
+                Order Now
+
+            </a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦7,000</span>
+
+            <div class="menu-icon">🦐</div>
+
+            <h4>Seafood Chowder</h4>
+
+            <p>
+
+                Creamy chowder filled with premium seafood for a luxurious start.
+
+            </p>
+
+            <a href="#" class="menu-btn">
+
+                Order Now
+
+            </a>
+
+        </article>
+
+    </div>
+
+</div>
+
+
+<!--==============================
+        LUNCH PACKS
+================================-->
+
+<div class="menu-category" data-category="lunchpacks">
+
+    <div class="category-title">
+
+        <h3>Lunch Packs</h3>
+
+        <p>Perfect for office lunches, corporate meetings and everyday enjoyment.</p>
+
+    </div>
+
+    <div class="menu-grid">
+
+        <article class="menu-card featured">
+
+            <span class="price">₦20,000</span>
+
+            <span class="ribbon gold">Premium</span>
+
+            <div class="menu-icon">🍛</div>
+
+            <h4>Basmati Rice & Beans</h4>
+
+            <p>
+                Served with our rich Designer Stew.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦10,000</span>
+
+            <div class="menu-icon">🍚</div>
+
+            <h4>Ofada Rice</h4>
+
+            <p>
+                Ayamase Sauce, Plantain, Assorted Meat, Egg & Fish.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦10,000</span>
+
+            <div class="menu-icon">🍗</div>
+
+            <h4>Party Rice Combo</h4>
+
+            <p>
+                Party Jollof or Fried Rice with Plantain, Salad & Turkey.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦10,000</span>
+
+            <div class="menu-icon">🔥</div>
+
+            <h4>Asun Jollof Rice</h4>
+
+            <p>
+                Party Jollof Rice served with spicy Peppered Goat Meat.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦10,000</span>
+
+            <div class="menu-icon">🌾</div>
+
+            <h4>Village Rice</h4>
+
+            <p>
+                Traditional Village Rice served with Egg, Round Fish & Beef.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦8,000</span>
+
+            <div class="menu-icon">🍝</div>
+
+            <h4>Jollof Spaghetti</h4>
+
+            <p>
+                Delicious Jollof Spaghetti served with Turkey.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦8,000</span>
+
+            <div class="menu-icon">🥘</div>
+
+            <h4>Ewa Aganyin</h4>
+
+            <p>
+                Served with Plantain, Ponmo, Beef & Round Fish.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦8,000</span>
+
+            <div class="menu-icon">🍠</div>
+
+            <h4>Yam & Sweet Potato Pottage</h4>
+
+            <p>
+                Served with Plantain, Fish, Beef and Ponmo in Sauce.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card">
+
+            <span class="price">₦8,000</span>
+
+            <div class="menu-icon">🥣</div>
+
+            <h4>Amala Special</h4>
+
+            <p>
+                Amala with Gbegiri, Ewedu, Assorted Meat & Goat Meat.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+
+
+        <article class="menu-card featured">
+
+            <span class="price">₦10,000</span>
+
+            <span class="ribbon">Chef's Pick</span>
+
+            <div class="menu-icon">🍲</div>
+
+            <h4>Pounded Yam / Eba</h4>
+
+            <p>
+                Served with Efo Riro or Egusi and Assorted Goat Meat.
+            </p>
+
+            <a href="#" class="menu-btn">Order Now</a>
+
+        </article>
+
+    </div>
+
+</div>
+
+
+<!--==============================
+        FOOD BOWLS
+================================-->
+
+<div class="menu-category" data-category="foodbowls">
+
+    <div class="category-title">
+
+        <h3>Food Bowls</h3>
+
+        <p>
+            Freshly prepared bowls of your favourite Nigerian dishes, perfect for sharing or personal enjoyment.
+        </p>
+
+    </div>
+
+    <div class="menu-grid">
+
+        <!-- Rice Bowl -->
+
+        <article class="menu-card featured">
+
+            <span class="price">From ₦16,000</span>
+
+            <span class="ribbon gold">Best Seller</span>
+
+            <div class="menu-icon">🍚</div>
+
+            <h4>Rice Collection</h4>
+
+            <ul>
+
+                <li>Party Jollof Rice</li>
+
+                <li>Nigerian Fried Rice</li>
+
+                <li>Basmati Fried Rice</li>
+
+                <li>Village Rice</li>
+
+                <li>Asun Rice</li>
+
+                <li>Rice & Beans</li>
+
+                <li>Ofada Rice</li>
+
+                <li>Ayamase Sauce</li>
+
+            </ul>
+
+            <a href="#" class="menu-btn">Order Bowl</a>
+
+        </article>
+
+
+
+        <!-- Soups -->
+
+        <article class="menu-card">
+
+            <span class="price">From ₦20,000</span>
+
+            <div class="menu-icon">🥘</div>
+
+            <h4>Soups & Stews</h4>
+
+            <ul>
+
+                <li>Buka Stew</li>
+
+                <li>Designer Stew</li>
+
+                <li>Goat Meat Stew</li>
+
+                <li>Cow Leg Stew</li>
+
+                <li>Cow Tail Stew</li>
+
+                <li>Fresh Crocker Fish Stew</li>
+
+                <li>Hake Fish Stew</li>
+
+            </ul>
+
+            <a href="#" class="menu-btn">Order Bowl</a>
+
+        </article>
+
+
+
+        <!-- Nigerian Soups -->
+
+        <article class="menu-card">
+
+            <span class="price">From ₦20,000</span>
+
+            <div class="menu-icon">🍲</div>
+
+            <h4>Traditional Soups</h4>
+
+            <ul>
+
+                <li>Efo Riro</li>
+
+                <li>Egusi</li>
+
+                <li>Seafood Okra</li>
+
+                <li>Ewedu</li>
+
+                <li>Gbegiri</li>
+
+            </ul>
+
+            <a href="#" class="menu-btn">Order Bowl</a>
+
+        </article>
+
+
+
+        <!-- Pepper Soup -->
+
+        <article class="menu-card">
+
+            <span class="price">From ₦30,000</span>
+
+            <div class="menu-icon">🔥</div>
+
+            <h4>Pepper Soups</h4>
+
+            <ul>
+
+                <li>Goat Meat Pepper Soup</li>
+
+                <li>Turkey Pepper Soup</li>
+
+                <li>Catfish Pepper Soup</li>
+
+            </ul>
+
+            <a href="#" class="menu-btn">Order Bowl</a>
+
+        </article>
+
+
+
+        <!-- Proteins -->
+
+        <article class="menu-card">
+
+            <span class="price">From ₦2,000</span>
+
+            <div class="menu-icon">🍗</div>
+
+            <h4>Proteins</h4>
+
+            <ul>
+
+                <li>Chicken</li>
+
+                <li>Turkey</li>
+
+                <li>Beef</li>
+
+                <li>Goat Meat</li>
+
+                <li>Hake Fish</li>
+
+                <li>Crocker Fish</li>
+
+                <li>Gizzard</li>
+
+                <li>Snail</li>
+
+            </ul>
+
+            <a href="#" class="menu-btn">Order Bowl</a>
+
+        </article>
+
+
+
+        <!-- Sides -->
+
+        <article class="menu-card">
+
+            <span class="price">From ₦1,000</span>
+
+            <div class="menu-icon">🥗</div>
+
+            <h4>Sides</h4>
+
+            <ul>
+
+                <li>Moi Moi</li>
+
+                <li>Plantain</li>
+
+                <li>Salad</li>
+
+            </ul>
+
+            <a href="#" class="menu-btn">Order Bowl</a>
+
+        </article>
+
+
+
+        <!-- Swallows -->
+
+        <article class="menu-card">
+
+            <span class="price">From ₦1,000</span>
+
+            <div class="menu-icon">🍠</div>
+
+            <h4>Swallows</h4>
+
+            <ul>
+
+                <li>Pounded Yam</li>
+
+                <li>Poundo</li>
+
+                <li>Semo</li>
+
+                <li>Amala</li>
+
+            </ul>
+
+            <a href="#" class="menu-btn">Order Bowl</a>
+
+        </article>
+
+
+
+        <!-- Takeaway -->
+
+        <article class="menu-card featured">
+
+            <span class="price">₦6,000+</span>
+
+            <span class="ribbon">Quick Meal</span>
+
+            <div class="menu-icon">🥡</div>
+
+            <h4>Takeaway Packs</h4>
+
+            <ul>
+
+                <li>Jollof Rice + Chicken</li>
+
+                <li>Jollof Rice + Chicken + Fish</li>
+
+                <li>Jollof/Fried Rice + Chicken</li>
+
+                <li>Jollof/Fried Rice + Chicken + Fish</li>
+
+                <li>Jollof Rice + Turkey</li>
+
+                <li>Jollof/Fried Rice + Turkey</li>
+
+            </ul>
+
+            <a href="#" class="menu-btn">Order Bowl</a>
+
+        </article>
+
+    </div>
+
+</div>
+
+</section>
+
+<section class="soup-section" >
   <div class="soup-intro">
     <h1><span>Soup Bowls</span></h1>
    <p>Enjoy rich, handcrafted Nigerian soups served fresh per liter — each bowl is generously packed with meats, spices, and flavor, giving you full value for every naira spent.</p>
@@ -632,6 +1582,11 @@
   </div>
 </section>
 
+
+<a href="#orderSection" class="order-now-btn">
+    🍽️ Order Now
+</a>
+
     <a href="https://wa.me/+234 704 777 7521" class="whatsapp-icon" target="_blank" rel="noopener">
         <img src="images/whatsapp.jpg" alt="WhatsApp Icon" />
     </a>
@@ -653,6 +1608,68 @@
   </div>
 </footer>
 
-<script src="menuscript.js"></script>    
+<script src="menuscript.js"></script>
+<script src="orderscript.js"></script>
+<script>
+    // Catering tabs — fully static, just shows/hides the .menu-category
+    // blocks that already exist in the HTML. No backend, no fetch.
+    document.querySelectorAll('#catering .menu-tabs button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#catering .menu-tabs button').forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            const cat = btn.dataset.category;
+            document.querySelectorAll('#catering .menu-category').forEach((section) => {
+                section.style.display = (cat === 'all' || section.dataset.category === cat) ? '' : 'none';
+            });
+        });
+    });
+</script>
+<script src="authHelper.js"></script>
+<script>
+    // Mobile cart drawer controls (open/close, order-type toggle, mobile
+    // checkout submit). renderCart() in orderscript.js already calls
+    // syncMobileCart() itself, so no need to wrap it here.
+
+    function openMobileCart() {
+        syncMobileCart();
+        document.getElementById("mobileDrawer").classList.add("open");
+        document.getElementById("mobileOverlay").classList.add("open");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeMobileCart() {
+        document.getElementById("mobileDrawer").classList.remove("open");
+        document.getElementById("mobileOverlay").classList.remove("open");
+        document.body.style.overflow = "";
+    }
+
+    document.getElementById("mobileOrderType").addEventListener("change", (e) => {
+        document.getElementById("mobileDeliveryFields").style.display =
+            e.target.value === "delivery" ? "block" : "none";
+    });
+
+    document.getElementById("mobilePlaceOrderBtn").addEventListener("click", () => {
+        const mName = document.getElementById("mobileCustomerName").value.trim();
+        const mPhone = document.getElementById("mobileCustomerPhone").value.trim();
+        const mType = document.getElementById("mobileOrderType").value;
+        const mAddress = document.getElementById("mobileDeliveryAddress").value.trim();
+        const mNotes = document.getElementById("mobileOrderNotes").value.trim();
+
+        document.getElementById("customerName").value = mName;
+        document.getElementById("customerPhone").value = mPhone;
+        document.getElementById("orderType").value = mType;
+        document.getElementById("deliveryAddress").value = mAddress;
+        document.getElementById("orderNotes").value = mNotes;
+
+        const mobileError = document.getElementById("mobileFormError");
+        mobileError.textContent = "";
+
+        if (!mName) { mobileError.textContent = "Please enter your name."; return; }
+        if (!mPhone) { mobileError.textContent = "Please enter your phone number."; return; }
+        if (mType === "delivery" && !mAddress) { mobileError.textContent = "Please enter your delivery address."; return; }
+
+        handleWhatsAppOrder();
+    });
+</script>
 </body>
 </html>

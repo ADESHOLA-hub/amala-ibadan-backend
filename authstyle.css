@@ -1,0 +1,237 @@
+.auth-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 130px 20px 60px;
+    background-color: #fdf7f2;
+}
+
+.auth-box {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    max-width: 420px;
+    width: 100%;
+}
+
+.auth-box h1 {
+    font-family: 'Playfair Display', serif;
+    color: #e08414;
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 26px;
+}
+
+.auth-box label {
+    display: block;
+    font-size: 0.87rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 16px;
+}
+
+.auth-box input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.auth-box input:focus {
+    outline: none;
+    border-color: #e08414;
+}
+
+.place-order-btn {
+    width: 100%;
+    background-color: #e08414;
+    color: #fff;
+    border: none;
+    padding: 13px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 4px;
+}
+
+.place-order-btn:hover {
+    background-color: #c4720f;
+}
+
+.place-order-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.form-error {
+    color: #b91c1c;
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+    text-align: center;
+    min-height: 0;
+}
+
+.auth-switch {
+    text-align: center;
+    font-size: 0.88rem;
+    color: #666;
+    margin-top: 22px;
+}
+
+.auth-switch a {
+    color: #e08414;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Account page */
+.account-page {
+    max-width: 800px;
+    margin: 0 auto 70px;
+    padding: 130px 20px 0;
+}
+
+.account-header {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    padding: 24px 28px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.account-header h1 {
+    font-size: 1.4rem;
+    color: #2e2e2e;
+}
+
+.account-header p {
+    color: #888;
+    font-size: 0.88rem;
+}
+
+.logout-btn {
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #555;
+    padding: 9px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.logout-btn:hover {
+    border-color: #999;
+}
+
+.order-history-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+}
+
+.order-history-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.order-history-number {
+    font-weight: 700;
+    color: #2e2e2e;
+}
+
+.order-history-date {
+    color: #999;
+    font-size: 0.82rem;
+}
+
+.order-history-items {
+    color: #555;
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+}
+
+.order-history-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-history-total {
+    font-weight: 700;
+    color: #e74c3c;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-pending { background: #fff3cd; color: #92720b; }
+.status-confirmed { background: #d6eaff; color: #1d5a9e; }
+.status-preparing { background: #ffe2c2; color: #b35e0a; }
+.status-ready { background: #d9f2dd; color: #237a3a; }
+.status-delivered { background: #e2e2e2; color: #444; }
+.status-cancelled { background: #fde0de; color: #b3261e; }
+
+.empty-state-text {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 40px 0;
+}
+
+@media (max-width: 600px) {
+    .auth-page {
+        padding: 110px 16px 40px;
+    }
+    .auth-box {
+        padding: 28px 22px;
+    }
+    .account-page {
+        padding: 100px 16px 0;
+    }
+    .account-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .logout-btn {
+        align-self: stretch;
+    }
+    .order-history-card {
+        padding: 16px 18px;
+    }
+    .order-history-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}

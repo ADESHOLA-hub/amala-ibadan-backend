@@ -1,0 +1,278 @@
+/* ── Track page ──────────────────────────── */
+.track-page {
+    max-width: 580px;
+    margin: 0 auto 70px;
+    padding: 110px 20px 0;
+}
+
+.track-form {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    padding: 28px;
+    margin-bottom: 24px;
+    border: 1px solid #eee9e2;
+}
+
+.track-form label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #555;
+    margin-bottom: 14px;
+}
+
+.track-form input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1.5px solid #eee9e2;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    font-family: inherit;
+    transition: border-color 0.18s;
+    background: #faf8f5;
+}
+.track-form input:focus {
+    outline: none;
+    border-color: #e08414;
+    background: #fff;
+}
+
+.place-order-btn {
+    width: 100%;
+    background: #e08414;
+    color: #fff;
+    border: none;
+    padding: 13px;
+    border-radius: 10px;
+    font-size: 0.97rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+    margin-top: 4px;
+}
+.place-order-btn:hover { background: #c4720f; }
+.place-order-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+.form-error {
+    color: #b91c1c;
+    font-size: 0.82rem;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* ── Track result card ───────────────────── */
+.track-result {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    padding: 28px;
+    display: none;
+    border: 1px solid #eee9e2;
+}
+.track-result.show { display: block; }
+
+.track-order-number {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.track-placed-time {
+    color: #888;
+    font-size: 0.82rem;
+    margin-bottom: 28px;
+}
+
+/* ── Status stepper ──────────────────────── */
+.status-tracker {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    position: relative;
+}
+
+.status-tracker::before {
+    content: "";
+    position: absolute;
+    top: 13px;
+    left: 0; right: 0;
+    height: 2px;
+    background: #eee9e2;
+    z-index: 0;
+}
+
+.status-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.status-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #eee9e2;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.status-step.completed .status-dot {
+    background: #e08414;
+    color: #fff;
+}
+
+.status-step.current .status-dot {
+    background: #e08414;
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(224,132,20,0.2);
+}
+
+.status-step-label {
+    font-size: 0.68rem;
+    color: #aaa;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+.status-step.completed .status-step-label,
+.status-step.current .status-step-label {
+    color: #e08414;
+    font-weight: 700;
+}
+
+/* ── Items + totals ──────────────────────── */
+.track-items-list {
+    border-top: 1.5px solid #eee9e2;
+    padding-top: 16px;
+    margin-bottom: 4px;
+}
+
+.track-item-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.track-totals { border-top: 1.5px solid #eee9e2; margin-top: 14px; padding-top: 14px; }
+
+.track-totals .cart-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+.track-totals .cart-total {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1a1a1a;
+}
+
+/* ── Banners ─────────────────────────────── */
+.cancelled-banner {
+    background: #fdecea;
+    color: #b3261e;
+    padding: 14px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.fresh-order-banner {
+    background: #e7f6ea;
+    color: #237a3a;
+    padding: 14px 18px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* ── Confirmation popup ──────────────────── */
+#orderConfirmPopup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.confirm-popup-box {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+    max-width: 360px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+.confirm-popup-icon { font-size: 3.2rem; margin-bottom: 14px; }
+
+.confirm-popup-box h2 {
+    font-family: 'Playfair Display', serif;
+    color: #e08414;
+    font-size: 1.7rem;
+    margin-bottom: 10px;
+}
+
+.confirm-popup-box p {
+    color: #555;
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+    line-height: 1.5;
+}
+
+.confirm-popup-box button {
+    margin-top: 20px;
+    background: #e08414;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+}
+.confirm-popup-box button:hover { background: #c4720f; }
+
+/* ── Responsive ──────────────────────────── */
+@media (max-width: 600px) {
+    .track-page { padding: 100px 14px 0; }
+    .track-form, .track-result { padding: 20px 16px; }
+    .status-step-label { font-size: 0.6rem; }
+    .status-dot { width: 24px; height: 24px; font-size: 0.68rem; }
+}
+
+@media (max-width: 380px) {
+    .status-tracker { flex-wrap: wrap; gap: 14px 0; }
+    .status-tracker::before { display: none; }
+    .status-step { flex: 0 0 33.33%; }
+}

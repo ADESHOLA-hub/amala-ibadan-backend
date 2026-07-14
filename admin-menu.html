@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | Admin</title>
+    <link rel="stylesheet" href="adminstyle.css">
+    <link rel="shortcut icon" href="images/logo.png">
+</head>
+<body>
+    <header class="admin-header">
+        <h1>Amala Ibadan <span>Admin</span></h1>
+        <nav class="admin-nav">
+            <a href="admin-orders.html">Orders</a>
+            <a href="admin-menu.html" class="active-tab">Menu</a>
+        </nav>
+    </header>
+
+    <main class="admin-container">
+        <div class="admin-toolbar">
+            <div class="filter-pills" id="categoryFilters">
+                <button class="filter-pill active-pill" data-category="all">All</button>
+            </div>
+            <button class="btn-primary" onclick="openAddModal()">+ Add Menu Item</button>
+        </div>
+
+        <div id="menuGrid" class="menu-admin-grid">
+            <p class="loading-text">Loading menu...</p>
+        </div>
+    </main>
+
+    <!-- Add / Edit Modal -->
+    <div id="itemModal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 id="modalTitle">Add Menu Item</h2>
+            <form id="itemForm">
+                <input type="hidden" id="itemId">
+
+                <label>Name
+                    <input type="text" id="itemName" required>
+                </label>
+
+                <label>Description
+                    <textarea id="itemDescription" rows="2"></textarea>
+                </label>
+
+                <label>Price (₦)
+                    <input type="number" id="itemPrice" min="0" step="1" required>
+                </label>
+
+                <label>Category
+                    <select id="itemCategory" required>
+                        <option value="starters">Starters</option>
+                        <option value="mains">Mains</option>
+                        <option value="sides">Sides</option>
+                        <option value="desserts">Desserts</option>
+                        <option value="drinks">Drinks</option>
+                        <option value="specials">Specials</option>
+                    </select>
+                </label>
+
+                <label>Image URL (optional)
+                    <input type="text" id="itemImage" placeholder="images/dish.jpg">
+                </label>
+
+                <div class="checkbox-row" style="margin-bottom: 16px;">
+                    <input type="checkbox" id="itemAvailable" checked>
+                    <label for="itemAvailable" style="margin:0;">Available for ordering</label>
+                </div>
+
+                <p id="formError" style="color:#c0392b; font-size:0.85rem; margin-bottom:10px;"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-primary" id="saveItemBtn">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="adminmenu.js"></script>
+</body>
+</html>

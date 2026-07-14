@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="test.css">
+    <title>Catering Menu | Amala Ibadan</title>
+</head>
+<body>
+    <!--==============================
+        MENU SECTION — content is rendered dynamically by test.js
+        from /api/catering, editable via admin-catering.html
+================================-->
+    <section class="premium-menu" id="menu">
+
+        <div class="menu-heading">
+            <span class="sub-title">✦ Luxury Catering Experience ✦</span>
+            <h2>Our Signature Menu</h2>
+            <p>
+                Every package is carefully curated to deliver an unforgettable dining experience for weddings,
+                corporate events, birthdays, owambe celebrations and private gatherings.
+            </p>
+        </div>
+
+        <!-- Category tabs — populated by test.js -->
+        <div class="menu-tabs">
+            <p class="loading-text">Loading menu...</p>
+        </div>
+
+        <!-- .menu-category blocks are inserted here dynamically, right after .menu-tabs -->
+
+    </section>
+
+    <script src="test.js"></script>
+</body>
+</html>

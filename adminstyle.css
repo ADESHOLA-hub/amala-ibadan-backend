@@ -1,0 +1,438 @@
+/* ===== Admin Dashboard Styles ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f3f1;
+    color: #2e2e2e;
+}
+
+.admin-header {
+    background-color: #2e2e2e;
+    color: #fff;
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.admin-header h1 {
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.admin-header h1 span {
+    color: #e08414;
+}
+
+.admin-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.admin-nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.admin-nav a:hover,
+.admin-nav a.active-tab {
+    background-color: #e08414;
+    color: #fff;
+}
+
+.admin-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+}
+
+.admin-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.filter-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-pill {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 7px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.2s ease;
+}
+
+.filter-pill:hover {
+    border-color: #e08414;
+}
+
+.filter-pill.active-pill {
+    background-color: #e08414;
+    border-color: #e08414;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #e08414;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #c4720f;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: #555;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    border-color: #999;
+}
+
+.btn-danger {
+    background-color: #fff;
+    color: #c0392b;
+    border: 1px solid #e0a8a0;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+    background-color: #fdecea;
+}
+
+.loading-text, .empty-state-text {
+    color: #999;
+    font-style: italic;
+    padding: 30px 0;
+    text-align: center;
+}
+
+/* ---- Orders table ---- */
+.orders-table-wrap {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #faf8f6;
+}
+
+th {
+    text-align: left;
+    padding: 14px 16px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #888;
+    border-bottom: 1px solid #eee;
+}
+
+td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f3f3f3;
+    font-size: 0.9rem;
+    vertical-align: top;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.order-items-cell {
+    max-width: 260px;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-pending { background: #fff3cd; color: #92720b; }
+.status-confirmed { background: #d6eaff; color: #1d5a9e; }
+.status-preparing { background: #ffe2c2; color: #b35e0a; }
+.status-ready { background: #d9f2dd; color: #237a3a; }
+.status-delivered { background: #e2e2e2; color: #444; }
+.status-cancelled { background: #fde0de; color: #b3261e; }
+
+.status-select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 0.85rem;
+    font-family: inherit;
+}
+
+.row-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ---- Menu grid ---- */
+.menu-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.menu-admin-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-admin-card .item-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+}
+
+.menu-admin-card h3 {
+    font-size: 1.05rem;
+    color: #2e2e2e;
+}
+
+.menu-admin-card .item-category {
+    font-size: 0.75rem;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+}
+
+.menu-admin-card .item-desc {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+.menu-admin-card .item-price {
+    font-weight: 700;
+    color: #e74c3c;
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.availability-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    margin-bottom: 12px;
+    color: #555;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+}
+
+/* ---- Modal (used for add/edit item) ---- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-box {
+    background: #fff;
+    border-radius: 14px;
+    padding: 30px;
+    max-width: 440px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-box h2 {
+    font-size: 1.25rem;
+    margin-bottom: 18px;
+    color: #2e2e2e;
+}
+
+.modal-box label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 14px;
+}
+
+.modal-box input,
+.modal-box select,
+.modal-box textarea {
+    width: 100%;
+    padding: 9px 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.modal-box input:focus,
+.modal-box select:focus,
+.modal-box textarea:focus {
+    outline: none;
+    border-color: #e08414;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-actions button {
+    flex: 1;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-row input {
+    width: auto;
+    margin: 0;
+}
+
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #2e2e2e;
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    z-index: 3000;
+    display: none;
+}
+
+.toast.show {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+}
+
+.toast.toast-error {
+    background: #c0392b;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 700px) {
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-container {
+        padding: 20px 14px 40px;
+    }
+    .admin-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-pills {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+    }
+    .filter-pill {
+        flex-shrink: 0;
+    }
+    th, td {
+        padding: 10px 12px;
+        font-size: 0.82rem;
+    }
+    .order-items-cell {
+        max-width: 160px;
+    }
+    .menu-admin-grid {
+        grid-template-columns: 1fr;
+    }
+    .modal-box {
+        padding: 22px;
+    }
+}

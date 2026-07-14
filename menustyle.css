@@ -908,6 +908,63 @@ h1 {
     height: auto;
 }
 
+.order-now-btn{
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    z-index: 999;
+}
+    .order-now-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #e08414;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 28px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(224, 132, 20, 0.4);
+
+    animation: pulseShake 1.8s infinite;
+}
+
+@keyframes pulseShake {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    10% {
+        transform: scale(1.1) rotate(-3deg);
+    }
+
+    20% {
+        transform: scale(1.15) rotate(3deg);
+    }
+
+    30% {
+        transform: scale(1.1) rotate(-3deg);
+    }
+
+    40% {
+        transform: scale(1.15) rotate(3deg);
+    }
+
+    50% {
+        transform: scale(1.2) rotate(0deg);
+    }
+
+    70% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
 .footer-section {
   background-color: #2f2f2f;
   color: #eee;

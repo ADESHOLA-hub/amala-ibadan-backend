@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order | Amala Ibadan</title>
+    <link rel="stylesheet" href="menustyle.css">
+    <link rel="stylesheet" href="trackstyle.css">
+    <link rel="shortcut icon" href="images/logo.png">
+</head>
+<body>
+    <header id="navbar">
+        <nav>
+            <div class="logo"><img src="images/logo2.png" alt="Amala Ibadan Logo"></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order Online</a></li>
+                <li><a href="track.html" style="color: #e08414;">Track Order</a></li>
+                <ul class="nav-links" id="authNavSlot" style="display:contents;"></ul>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <img src="images/menu3.png" alt="Menu Icon" class="menu-btn">
+        </nav>
+    </header>
+
+
+    <section class="track-page">
+        <form id="trackForm" class="track-form">
+            <label>Order Number
+                <input type="text" id="orderNumberInput" placeholder="e.g. ORD-0001" required>
+            </label>
+            <label>Phone Number
+                <input type="tel" id="phoneInput" placeholder="The number used when ordering" required>
+            </label>
+            <button type="submit" id="trackBtn" class="place-order-btn">Track Order</button>
+            <p id="trackError" class="form-error"></p>
+        </form>
+
+        <div id="trackResult" class="track-result"></div>
+    </section>
+
+    <a href="https://wa.me/+234 704 777 7521" class="whatsapp-icon" target="_blank" rel="noopener">
+        <img src="images/whatsapp.jpg" alt="WhatsApp Icon" />
+    </a>
+
+    <footer class="footer-section">
+        <div class="footer-content">
+            <h2>Need Assistance?</h2>
+            <p>If you have any questions, feedback, or need support, we're here to help. Reach out to us anytime.</p>
+            <a href="contact.html" class="footer-button">
+                <i class="fas fa-phone-alt"></i> Contact Us
+            </a>
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <p class="footer-copy">&copy; 2025 Amala Ibadan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="menuscript.js"></script>
+    <script src="authHelper.js"></script>
+    <script src="trackscript.js"></script>
+</body>
+</html>

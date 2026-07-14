@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Amala Ibadan</title>
+    <link rel="stylesheet" href="menustyle.css">
+    <link rel="stylesheet" href="authstyle.css">
+    <link rel="shortcut icon" href="images/logo.png">
+</head>
+<body>
+    <header id="navbar">
+        <nav>
+            <div class="logo"><img src="images/logo2.png" alt="Amala Ibadan Logo"></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order Online</a></li>
+                <li><a href="track.html">Track Order</a></li>
+                <ul class="nav-links" id="authNavSlot" style="display:contents;"></ul>
+            </ul>
+            <img src="images/menu3.png" alt="Menu Icon" class="menu-btn">
+        </nav>
+    </header>
+
+    <section class="account-page">
+        <div class="account-header">
+            <div>
+                <h1 id="welcomeName">My Account</h1>
+                <p id="welcomeEmail"></p>
+            </div>
+            <button class="logout-btn" id="logoutBtn">Log Out</button>
+        </div>
+
+        <h2 style="margin-bottom:16px; color:#2e2e2e; font-size:1.1rem;">Order History</h2>
+        <div id="orderHistoryList">
+            <p class="loading-text">Loading your orders...</p>
+        </div>
+    </section>
+
+    <script src="menuscript.js"></script>
+    <script src="authHelper.js"></script>
+    <script src="accountscript.js"></script>
+</body>
+</html>
