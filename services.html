@@ -178,17 +178,17 @@
 
         <div class="catering-right">
 
-            <img src="images/cater1.jpg" class="large-img">
+            <img src="images/agbada.jpg" class="large-img">
 
             <div class="small-grid">
 
-                <img src="images/cater2.jpg">
+                <img src="images/amalagirl.jpg">
 
-                <img src="images/cater3.jpg">
+                <img src="images/celeb.jpg">
 
-                <img src="images/cater4.jpg">
+                <img src="images/dance.jpg">
 
-                <img src="images/cater5.jpg">
+                <img src="images/award.jpg">
 
             </div>
 
@@ -216,8 +216,8 @@
   </div>
 
   <div class="dine-images">
-    <img src="images/dine1.jpg" alt="Dine-in restaurant interior">
-    <img src="images/takeout1.jpg" alt="Takeout packed meals">
+    <img src="images/foodstand.jpg" alt="Dine-in restaurant interior">
+    <img src="images/takein.jpg" alt="Takeout packed meals">
   </div>
 </section>
 
@@ -230,22 +230,22 @@
 
   <div class="bulk-grid">
     <div class="bulk-card">
-      <img src="images/teammeal.jpg" alt="Team meal delivery">
+      <!-- <img src="images/teammeal.jpg" alt="Team meal delivery"> -->
       <h3>Team Lunches</h3>
       <p>Perfect for startups, schools, and corporate teams. Meals delivered hot and ready to eat.</p>
     </div>
     <div class="bulk-card">
-      <img src="images/eventtray.jpg" alt="Event tray service">
+      <!-- <img src="images/eventtray.jpg" alt="Event tray service"> -->
       <h3>Event Trays</h3>
       <p>Trays of Amala, Efo Riro, Jollof & more for weddings, conferences & celebrations.</p>
     </div>
     <div class="bulk-card">
-      <img src="images/preorder.jpg" alt="Scheduled catering">
+      <!-- <img src="images/preorder.jpg" alt="Scheduled catering"> -->
       <h3>Scheduled Catering</h3>
       <p>Book in advance for consistent daily or weekly meal plans, perfect for institutions.</p>
     </div>
     <div class="bulk-card">
-      <img src="images/dispatch.jpg" alt="Food dispatch rider">
+      <!-- <img src="images/dispatch.jpg" alt="Food dispatch rider"> -->
       <h3>Nationwide Dispatch</h3>
       <p>Bulk deliveries available across states. We deliver to your location reliably.</p>
     </div>
@@ -264,7 +264,7 @@
       <div class="timeline-content">
         <h3>Consultation & Planning</h3>
         <p>We listen, understand your vision, and tailor every detail — menu, setup, staff — to your event style.</p>
-        <img src="images/consult.jpg" alt="Consultation session">
+        <!-- <img src="images/consult.jpg" alt="Consultation session"> -->
       </div>
     </div>
 
@@ -272,7 +272,7 @@
       <div class="timeline-content">
         <h3>Weddings & Traditional Events</h3>
         <p>Celebrate love and culture with curated menus, elegant decor, and seamless coordination — Yoruba style or modern luxury.</p>
-        <img src="images/tradwedding.jpg" alt="Yoruba wedding planning">
+        <!-- <img src="images/tradwedding.jpg" alt="Yoruba wedding planning"> -->
       </div>
     </div>
 
@@ -280,7 +280,7 @@
       <div class="timeline-content">
         <h3>Corporate & Formal Events</h3>
         <p>Branded elegance meets food excellence. Our team handles logistics, seating, and VIP arrangements with zero stress.</p>
-        <img src="images/formalsetup.jpg" alt="Corporate event planning">
+        <!-- <img src="images/formalsetup.jpg" alt="Corporate event planning"> -->
       </div>
     </div>
 
@@ -288,7 +288,7 @@
       <div class="timeline-content">
         <h3>Celebrations & Social Events</h3>
         <p>From birthdays to anniversaries, we deliver joy, energy, and memorable food experiences your guests will talk about.</p>
-        <img src="images/celebrate.jpg" alt="Birthday event planning">
+        <!-- <img src="images/celebrate.jpg" alt="Birthday event planning"> -->
       </div>
     </div>
 
@@ -296,7 +296,7 @@
       <div class="timeline-content">
         <h3>Execution & Support</h3>
         <p>On the day, our staff is present, proactive, and professional — ensuring every moment flows beautifully.</p>
-        <img src="images/servicecrew.jpg" alt="Event service crew in action">
+        <!-- <img src="images/servicecrew.jpg" alt="Event service crew in action"> -->
       </div>
     </div>
 
@@ -334,72 +334,19 @@
 </footer>
 
     <script>
-      
+
     // Mobile Menu
     const menuBtn = document.querySelector('.menu-btn');
     const navlinks = document.querySelector('.nav-links');
     const navbar = document.querySelector('#navbar');
-    const navLinks = document.querySelectorAll('.nav-links a');
 
     menuBtn.addEventListener('click', () => {
         navlinks.classList.toggle('mobile-menu');
     });
 
-    // Navbar Scroll Effect
+    // Navbar Scroll Effect (adds/removes .scrolled — styled in servicestyle.css)
     document.addEventListener('scroll', () => {
-        const scroll_position = window.scrollY;
-
-        if (scroll_position > 250) {
-            navbar.style.backgroundColor = '#fff';
-
-            navLinks.forEach(link => {
-                link.style.color = '#222'; // Black
-            });
-
-            // Active page stays orange
-            navLinks[0].style.color = '#e08414';
-
-        } else {
-            navbar.style.backgroundColor = 'transparent';
-
-            navLinks.forEach(link => {
-                link.style.color = '#fff'; // White
-            });
-
-            // Active page stays orange
-            navLinks[3].style.color = '#e08414';
-        }
-    });
-
-    // Team Carousel
-    function scrollTeam(direction) {
-        const container = document.getElementById("teamCarousel");
-        const cardWidth = container.querySelector(".team-card").offsetWidth + 20;
-
-        container.scrollBy({
-            left: direction * cardWidth,
-            behavior: "smooth"
-        });
-    }
-
-    // Image Carousel
-    document.addEventListener("DOMContentLoaded", () => {
-        const carousels = document.querySelectorAll(".carousel-images");
-
-        carousels.forEach((carousel) => {
-            const images = carousel.querySelectorAll("img");
-            let current = 0;
-
-            if (images.length > 1) {
-                images[0].classList.add("active");
-
-                setInterval(() => {
-                    images[current].classList.remove("active");
-                    current = (current + 1) % images.length;
-                    images[current].classList.add("active");
-                }, 3000);
-            }
-        });
+        navbar.classList.toggle('scrolled', window.scrollY > 60);
     });
 
     </script>

@@ -1,5 +1,5 @@
 // adminmenu.js
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "https://amala-ibadan-backend.onrender.com/api";
 
 let menuItems = [];
 let activeCategory = "all";
@@ -126,12 +126,17 @@ async function handleSaveItem(e) {
     const url = id ? `${API_BASE}/menu/${id}` : `${API_BASE}/menu`;
     const method = id ? "PUT" : "POST";
 
+    // ===== CHANGED: headers is now authHeaders() instead of a plain object,
+    // and we check handleAuthError() right after reading the response =====
     const res = await fetch(url, {
       method,
-      headers: { "Content-Type": "application/json" },
+      headers: authHeaders(),
       body: JSON.stringify(payload),
     });
     const data = await res.json();
+    if (handleAuthError(res)) return;
+    // ===== END CHANGED =====
+
     if (!data.success) throw new Error(data.message);
 
     showToast(id ? "Item updated" : "Item added");
@@ -147,8 +152,15 @@ async function handleSaveItem(e) {
 
 async function toggleAvailability(id) {
   try {
-    const res = await fetch(`${API_BASE}/menu/${id}/availability`, { method: "PATCH" });
+    // ===== CHANGED: added headers: authHeaders(), and the handleAuthError check =====
+    const res = await fetch(`${API_BASE}/menu/${id}/availability`, {
+      method: "PATCH",
+      headers: authHeaders(),
+    });
     const data = await res.json();
+    if (handleAuthError(res)) return;
+    // ===== END CHANGED =====
+
     if (!data.success) throw new Error(data.message);
     showToast("Availability updated");
     loadMenu();
@@ -161,8 +173,15 @@ async function deleteItem(id, name) {
   if (!confirm(`Delete "${name}" from the menu? This cannot be undone.`)) return;
 
   try {
-    const res = await fetch(`${API_BASE}/menu/${id}`, { method: "DELETE" });
+    // ===== CHANGED: added headers: authHeaders(), and the handleAuthError check =====
+    const res = await fetch(`${API_BASE}/menu/${id}`, {
+      method: "DELETE",
+      headers: authHeaders(),
+    });
     const data = await res.json();
+    if (handleAuthError(res)) return;
+    // ===== END CHANGED =====
+
     if (!data.success) throw new Error(data.message);
     showToast("Item deleted");
     loadMenu();

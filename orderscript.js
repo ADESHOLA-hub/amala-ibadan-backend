@@ -1,5 +1,4 @@
-// orderscript.js — WhatsApp ordering flow
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "https://amala-ibadan-backend.onrender.com/api";
 const WHATSAPP_NUMBER = "2347047777521"; // no + sign for wa.me links
 
 let menuItems = [];
