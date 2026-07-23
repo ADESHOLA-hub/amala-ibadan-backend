@@ -11,6 +11,7 @@ process.env.PORT = process.env.PORT || "5000";
 const menuRoutes = require('./src/routes/menuRoutes');
 const authRoutes = require('./src/routes/authRoutes');
 const orderRoutes = require('./src/routes/orderRoutes');
+const settingsRoutes = require('./src/routes/settingsRoutes');
 const cateringRoutes = require('./src/routes/cateringRoutes'); // ← added
 const errorHandler = require('./src/middleware/errorHandler');
 
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use('/api/menu', menuRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/settings', settingsRoutes);
 app.use('/api/catering', cateringRoutes); // ← added
 
 // Health check

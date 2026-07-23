@@ -2,12 +2,14 @@
 // Usage (from restaurant-backend folder): node createAdmin.js
 
 require('dotenv').config();
+const dns = require('dns');
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 const mongoose = require('mongoose');
 const User = require('./src/models/User'); // adjust path if you place User.js elsewhere
 
 // ⬇️ CHANGE THESE before running
-const USERNAME = 'youradminusername';
-const PASSWORD = 'ChooseAStrongPassword123!';
+const USERNAME = 'olayemi';
+const PASSWORD = 'olayemi*&29';
 
 mongoose.connect(process.env.MONGO_URI)
   .then(async () => {

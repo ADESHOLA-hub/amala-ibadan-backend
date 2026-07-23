@@ -1,61 +1,78 @@
 // authHelper.js
-// Shared across pages. Manages the logged-in user's token and basic info.
-// Uses localStorage so the login persists across page reloads/visits.
+// Include this script FIRST (before any other admin script) on EVERY ADMIN page only.
+// Do NOT include this on public pages (menu.html, order.html, index.html, etc.)
+// — it will force-redirect any page it's loaded on straight to login.html.
 
-const AUTH_API_BASE = "http://localhost:5000/api";
+const INACTIVITY_LIMIT_MS = 2 * 60 * 60 * 1000; // 2 hours
 
-function getToken() {
-  return localStorage.getItem("authToken");
+(function () {
+  const token = localStorage.getItem('adminToken');
+  if (!token) {
+    window.location.href = 'login.html';
+    return;
+  }
+
+  // Check how long it's been since the last recorded activity
+  const lastActive = parseInt(localStorage.getItem('adminLastActive') || '0', 10);
+  const now = Date.now();
+
+  if (lastActive && (now - lastActive > INACTIVITY_LIMIT_MS)) {
+    // Been inactive too long — force logout
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminUsername');
+    localStorage.removeItem('adminLastActive');
+    window.location.href = 'login.html';
+    return;
+  }
+
+  // Still within the window — refresh the "last active" timestamp
+  localStorage.setItem('adminLastActive', now.toString());
+})();
+
+// Reset the inactivity timer on real user activity
+['click', 'keydown', 'mousemove', 'scroll'].forEach((evt) => {
+  window.addEventListener(evt, () => {
+    localStorage.setItem('adminLastActive', Date.now().toString());
+  }, { passive: true });
+});
+
+// Periodically check in the background (every minute) in case the page
+// is left open with no activity at all — logs out once the limit is hit
+setInterval(() => {
+  const lastActive = parseInt(localStorage.getItem('adminLastActive') || '0', 10);
+  if (lastActive && (Date.now() - lastActive > INACTIVITY_LIMIT_MS)) {
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminUsername');
+    localStorage.removeItem('adminLastActive');
+    window.location.href = 'login.html';
+  }
+}, 60 * 1000);
+
+// Call this from any admin fetch() call to attach the auth header, e.g.:
+//   fetch(url, { headers: authHeaders() })
+function authHeaders() {
+  const token = localStorage.getItem('adminToken');
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  };
 }
 
-function getCurrentUser() {
-  const raw = localStorage.getItem("authUser");
-  return raw ? JSON.parse(raw) : null;
-}
-
-function isLoggedIn() {
-  return !!getToken();
-}
-
-function saveAuth(token, user) {
-  localStorage.setItem("authToken", token);
-  localStorage.setItem("authUser", JSON.stringify(user));
+// If the backend ever responds 401 (expired/invalid token), call this to log out
+function handleAuthError(response) {
+  if (response.status === 401) {
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminUsername');
+    localStorage.removeItem('adminLastActive');
+    window.location.href = 'login.html';
+    return true;
+  }
+  return false;
 }
 
 function logout() {
-  localStorage.removeItem("authToken");
-  localStorage.removeItem("authUser");
-  window.location.href = "login.html";
+  localStorage.removeItem('adminToken');
+  localStorage.removeItem('adminUsername');
+  localStorage.removeItem('adminLastActive');
+  window.location.href = 'login.html';
 }
-
-// Updates any nav bar on the page to show "Account / Logout" vs "Sign Up / Login"
-// Call this on DOMContentLoaded on every page that includes this script.
-function updateAuthNav() {
-  const slot = document.getElementById("authNavSlot");
-  if (!slot) return;
-
-  if (isLoggedIn()) {
-    const user = getCurrentUser();
-    slot.innerHTML = `
-      <li><a href="account.html">${escapeHtmlAuth(user?.name || "Account")}</a></li>
-      <li><a href="#" id="logoutLink">Logout</a></li>
-    `;
-    document.getElementById("logoutLink").addEventListener("click", (e) => {
-      e.preventDefault();
-      logout();
-    });
-  } else {
-    slot.innerHTML = `
-      <li><a href="login.html">Login</a></li>
-      <li><a href="signup.html">Sign Up</a></li>
-    `;
-  }
-}
-
-function escapeHtmlAuth(str) {
-  const div = document.createElement("div");
-  div.textContent = str || "";
-  return div.innerHTML;
-}
-
-document.addEventListener("DOMContentLoaded", updateAuthNav);
