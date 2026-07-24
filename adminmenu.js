@@ -63,6 +63,7 @@ function renderMenuGrid() {
         <div class="item-category">${item.category}</div>
         <p class="item-desc">${escapeHtml(item.description || "No description")}</p>
         <div class="item-price">₦${item.price.toLocaleString()}</div>
+        <div class="item-max-per-plate">${item.maxPerPlate ? `Max ${item.maxPerPlate} per plate` : "No per-item limit"}</div>
         <div class="availability-toggle">
           <input type="checkbox" ${item.available ? "checked" : ""} onchange="toggleAvailability('${item._id}')">
           <span>${item.available ? "Available" : "Unavailable"}</span>
@@ -82,6 +83,7 @@ function openAddModal() {
   document.getElementById("itemForm").reset();
   document.getElementById("itemId").value = "";
   document.getElementById("itemAvailable").checked = true;
+  document.getElementById("itemMaxPerPlate").value = "";
   document.getElementById("formError").textContent = "";
   document.getElementById("itemModal").classList.add("show");
 }
@@ -95,6 +97,7 @@ function openEditModal(item) {
   document.getElementById("itemCategory").value = item.category;
   document.getElementById("itemImage").value = item.image || "";
   document.getElementById("itemAvailable").checked = item.available;
+  document.getElementById("itemMaxPerPlate").value = item.maxPerPlate || "";
   document.getElementById("formError").textContent = "";
   document.getElementById("itemModal").classList.add("show");
 }
@@ -109,6 +112,8 @@ async function handleSaveItem(e) {
   errorEl.textContent = "";
 
   const id = document.getElementById("itemId").value;
+  const maxPerPlateRaw = document.getElementById("itemMaxPerPlate").value.trim();
+
   const payload = {
     name: document.getElementById("itemName").value.trim(),
     description: document.getElementById("itemDescription").value.trim(),
@@ -116,6 +121,8 @@ async function handleSaveItem(e) {
     category: document.getElementById("itemCategory").value,
     image: document.getElementById("itemImage").value.trim(),
     available: document.getElementById("itemAvailable").checked,
+    // Empty field = no special limit (null). Otherwise, a whole number >= 1.
+    maxPerPlate: maxPerPlateRaw === "" ? null : Number(maxPerPlateRaw),
   };
 
   const saveBtn = document.getElementById("saveItemBtn");
@@ -126,8 +133,6 @@ async function handleSaveItem(e) {
     const url = id ? `${API_BASE}/menu/${id}` : `${API_BASE}/menu`;
     const method = id ? "PUT" : "POST";
 
-    // ===== CHANGED: headers is now authHeaders() instead of a plain object,
-    // and we check handleAuthError() right after reading the response =====
     const res = await fetch(url, {
       method,
       headers: authHeaders(),
@@ -135,7 +140,6 @@ async function handleSaveItem(e) {
     });
     const data = await res.json();
     if (handleAuthError(res)) return;
-    // ===== END CHANGED =====
 
     if (!data.success) throw new Error(data.message);
 
@@ -152,14 +156,12 @@ async function handleSaveItem(e) {
 
 async function toggleAvailability(id) {
   try {
-    // ===== CHANGED: added headers: authHeaders(), and the handleAuthError check =====
     const res = await fetch(`${API_BASE}/menu/${id}/availability`, {
       method: "PATCH",
       headers: authHeaders(),
     });
     const data = await res.json();
     if (handleAuthError(res)) return;
-    // ===== END CHANGED =====
 
     if (!data.success) throw new Error(data.message);
     showToast("Availability updated");
@@ -173,14 +175,12 @@ async function deleteItem(id, name) {
   if (!confirm(`Delete "${name}" from the menu? This cannot be undone.`)) return;
 
   try {
-    // ===== CHANGED: added headers: authHeaders(), and the handleAuthError check =====
     const res = await fetch(`${API_BASE}/menu/${id}`, {
       method: "DELETE",
       headers: authHeaders(),
     });
     const data = await res.json();
     if (handleAuthError(res)) return;
-    // ===== END CHANGED =====
 
     if (!data.success) throw new Error(data.message);
     showToast("Item deleted");

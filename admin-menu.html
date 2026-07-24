@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <script src="authHelper.js"></script>
+    <script src="adminSettings.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu | Admin</title>
@@ -16,7 +17,17 @@
             <a href="admin-menu.html" class="active-tab">Menu</a>
         </nav>
     </header>
-
+<div style="background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin-bottom:20px; max-width:320px;">
+  <h3 style="margin-top:0;">Plate Settings</h3>
+  <form id="settingsForm">
+    <label style="display:block; margin-bottom:8px;">
+      Max items per plate
+      <input type="number" id="maxPortionsInput" min="1" style="display:block; width:100%; padding:8px; margin-top:4px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
+    </label>
+    <p id="settingsMsg" style="font-size:14px; min-height:18px;"></p>
+    <button type="submit" id="saveSettingsBtn" style="background:#a0442c; color:#fff; border:none; padding:8px 16px; border-radius:6px; cursor:pointer;">Save</button>
+  </form>
+</div>
     <main class="admin-container">
         <div class="admin-toolbar">
             <div class="filter-pills" id="categoryFilters">

@@ -98,19 +98,31 @@ function renderMenu() {
 
   menuListEl.innerHTML = filtered.map((item) => {
     const imgSrc = item.image && item.image.trim() !== "" ? item.image : "images/logo2.png";
-    const disabled = !item.available || plateCount === 0 || plateFull;
+    const itemQtyOnActivePlate = getItemQuantityOnPlate(activePlateIndex, item._id);
+    const itemLimitReached = item.maxPerPlate && itemQtyOnActivePlate >= item.maxPerPlate;
+    const disabled = !item.available || plateCount === 0 || plateFull || itemLimitReached;
+    const limitHint = item.maxPerPlate ? `<div class="item-limit-hint">Max ${item.maxPerPlate} per plate</div>` : "";
     return `
       <div class="order-item-card">
         <img src="${imgSrc}" alt="${esc(item.name)}" onerror="this.src='images/logo2.png'">
         ${!item.available ? `<span class="unavailable-badge">Currently unavailable</span>` : ""}
         <div class="order-item-name">${esc(item.name)}</div>
         <div class="order-item-desc">${esc(item.description || "")}</div>
+        ${limitHint}
         <div class="order-item-footer">
           <span class="order-item-price">₦${item.price.toLocaleString()}</span>
-          <button class="add-to-cart-btn" ${disabled ? "disabled" : ""} onclick="addToPlate('${item._id}')">Add</button>
+          <button class="add-to-cart-btn" ${disabled ? "disabled" : ""} onclick="addToPlate('${item._id}')">
+            ${itemLimitReached ? "Limit reached" : "Add"}
+          </button>
         </div>
       </div>`;
   }).join("");
+}
+
+function getItemQuantityOnPlate(plateIndex, itemId) {
+  const plate = plates[plateIndex];
+  if (!plate) return 0;
+  return plate.items[itemId] || 0;
 }
 
 // ─── Plates ───────────────────────────────────────────────────
@@ -177,9 +189,12 @@ function addToPlate(itemId) {
 
   const plate = plates[activePlateIndex];
   const currentCount = getPlatePortionCount(activePlateIndex);
-  if (currentCount >= maxPortionsPerPlate) return; // full — button should already be disabled
+  if (currentCount >= maxPortionsPerPlate) return; // plate is full overall
 
-  plate.items[itemId] = (plate.items[itemId] || 0) + 1;
+  const currentItemQty = plate.items[itemId] || 0;
+  if (item.maxPerPlate && currentItemQty >= item.maxPerPlate) return; // this dish's own limit reached
+
+  plate.items[itemId] = currentItemQty + 1;
   renderPlateTabs();
   renderMenu();
   renderCart();
